@@ -36,7 +36,7 @@ OBJ = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o \
 	ft_isspace.o ft_lstdelmem.o get_next_line.o ft_strjoinfree.o ft_tablen.o tab_len.o \
 	tab_free.o
 
-CFLAGS = -g -c -Wall -Wextra -Werror -I includes
+CFLAGS = -c -Wall -Wextra -Werror -I includes
 .PHONY: all clean fclean re
 
 RM = rm -rf

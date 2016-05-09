@@ -1,16 +1,13 @@
 NAME = wolf3d 
 CC = clang
-LIB = libft/libft.a
+LIB = lib/libft/libft.a
 FLAGS = -Wall -Werror -Wextra -Ofast 
-LIBGRPH = -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit \
-		  -D_REENTRANT -lpthread
-INCLUDES = -I includes -I libft/includes -I minilibx_macos
-INC	= includes/fractol.h
-OBJS = main.o parsing.o draw.o init.o fractals.o handler.o init_fractals.o \
-	   worker.o event.o event2.o
+LIBGRPH = -Llib -lSDL2
+INCLUDES = -I include -I lib/libft/includes -I include/SDL2
+OBJS = main.o
 .PHONY: all clean fclean re
 
-VPATH = sources/:minilibx_macos
+VPATH = source
 
 all: $(NAME)
 
@@ -18,19 +15,16 @@ $(NAME): $(LIB) $(OBJS)
 	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) $(LIB) -o $(NAME) $(LIBGRPH)
 
 $(LIB):
-	make -C libft/
-	make -C minilibx_macos
+	make -C lib/libft/
 
-%.o : %.c $(INC)
+%.o : %.c
 	$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@ 
 
 clean:
 	rm -f $(OBJS)
 
 fclean: clean
-	make fclean -C libft/
-	make clean -C minilibx_macos
+	make fclean -C lib/libft/
 	rm -f $(NAME)
-	rm -rf $(NAME).dsym
 
 re: fclean all
