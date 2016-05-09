@@ -5,7 +5,7 @@ OBJDIR		= obj
 
 LIB 		= lib/libft/libft.a
 FLAGS 		= -Wall -Werror -Wextra -O3
-LIBGRPH 	= -Llib -lSDL2
+LIBGRPH 	= -Llib -lSDL2 -framework OpenGL
 INCLUDES 	= -I include -I lib/libft/includes -I include/SDL2
 OBJS 		= $(OBJDIR)/main.o \
 
