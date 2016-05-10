@@ -12,7 +12,9 @@ FLAGS 		:= -Wall -Werror -Wextra -O3
 LIBGRPH 	:= -framework OpenGL
 INCLUDES 	:= -I include -I lib/libft/includes -I include/SDL2
 SDLDYLIB	:= $(LIBDIR)/$(SDLIBDIR)/libSDL2-2.0.0.dylib
-OBJS 		:= $(OBJDIR)/main.o \
+OBJS 		:=	$(OBJDIR)/main.o \
+				$(OBJDIR)/init.o \
+				$(OBJDIR)/init2.o \
 
 
 .PHONY: all clean fclean re
@@ -31,7 +33,7 @@ $(LIB):
 
 $(OBJDIR)/%.o : %.c
 	@mkdir -p $(OBJDIR) 
-	$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@ 
+	$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 clean:
 	rm -rf $(OBJDIR) 
