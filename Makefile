@@ -25,12 +25,6 @@ $(NAME): $(LIB) $(OBJS)
 	$(CC) $(FLAGS) -rpath 'lib/libsdl/' $(LIB) $(LIBSDL) $(INCLUDES) $(OBJS)  -o $(NAME) $(LIBGRPH)
 	@echo "Replacing /usr/local/lib with ./lib ..."
 	install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDLDYLIB) $(NAME)
-ifeq ($(expected), $(out))
-@echo "✓ The the new dynamic lib path is $(expected)"
-else
-@echo "✕ Error while trying to change dynamic lib path is still  $(out)"
-endif
-
 
 $(LIB):
 	make -C lib/libft/

@@ -1,11 +1,7 @@
-#include <SDL2/SDL.h>
+#include "wolf3d.h"
 
-int main()
+int main(int ac, char **av)
 {
-	int posX = 100;
-	int	posY = 200;
-	int sizeX = 300;
-	int sizeY = 400;
 
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
@@ -32,20 +28,25 @@ int main()
 	}
 	int running = 1;
 
+	SDL_RenderSetLogicalSize(renderer, sizeX, sizeY);
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_RenderClear(renderer);
 	while (running)
 	{
 		while(SDL_PollEvent(&e) != 0)
 		{
 			if (e.type == SDL_QUIT)
 				running = 0;
+			else if (e.type == SDL_KEYDOWN)
+			{
+				if (e.key.keysym.sym == SDLK_ESCAPE)
+				{
+					running = 0;
+				}
+			}
 		}
-		SDL_UpdateWindowSurface(window);
+		//SDL_UpdateWindowSurface(window);
 	}
-	/* SDL_RenderSetLogicalSize(renderer, sizeX, sizeY); */
-	/* SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); */
-	/* SDL_RenderClear(renderer); */
-	/* //should check screen return if NULL; */
-	/* SDL_RenderPresent(renderer); */
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 	return (0);

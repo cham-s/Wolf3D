@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include "get_next_line.h"
+# define EXIT_ERROR -1
 
 typedef enum		e_bool
 {
