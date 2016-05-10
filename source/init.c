@@ -20,10 +20,9 @@ void	init_window_info(t_winfo *w, int pos_x, int pos_y, int size_x, int size_y)
 	w->all_info = 1;
 }
 
-
 int		create_window(t_winfo *w, char *title, int flags)
 {
-
+	w->title = title;
 	w->window = SDL_CreateWindow(w->title, w->pos.x, w->pos.y,
 								w->size.x, w->size.y, flags);
 	if (w->window == NULL)
@@ -44,7 +43,7 @@ int		create_renderer(t_winfo *w, int index, int flags)
 						window before creating renderer", 2);
 		return(EXIT_ERROR);
 	}
-	w->renderer = SDL_CreateRendrer(w->window, , index, flags):
+	w->renderer = SDL_CreateRenderer(w->window, index, flags);
 	if (w->renderer == NULL)
 	{
 		ft_putstr_fd("Failed to Create Renderer: ", 2);
@@ -73,12 +72,12 @@ void	run_wolf(t_winfo *w)
 	{
 		if (event.type == SDL_QUIT)
 			running = 0;
-		else if(key.type == SDL_KEYDOWN)
+		else if(event.key.type == SDL_KEYDOWN)
 		{
-			if(envent.key.seysym.sym == SDLK_ESCAPE)
+			if(event.key.keysym.sym == SDLK_ESCAPE)
 				running = 0;
 		}
-		render();
+		render(w, &p.pos);
 		SDL_Delay(16);
 	}
 }
