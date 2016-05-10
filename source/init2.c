@@ -32,6 +32,7 @@ void	render(t_winfo *w, SDL_Rect *player_pos)
 	SDL_SetRenderDrawColor(w->renderer, 0, 0, 255, 255);
 	SDL_RenderFillRect(w->renderer, player_pos);
 	SDL_SetRenderDrawColor(w->renderer, 0, 255, 0, 255);
+	//SDL_UpdateWindowSurface(window);
 	SDL_RenderPresent(w->renderer);
 	while (1);
 }
