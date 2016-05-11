@@ -18,7 +18,6 @@ OBJS 		:=	$(OBJDIR)/main.o \
 				$(OBJDIR)/init.o \
 				$(OBJDIR)/init2.o \
 
-
 .PHONY: all clean fclean re
 
 VPATH = source
@@ -27,11 +26,9 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
 	$(CC) $(FLAGS) $(LIB) $(LIBSDL) $(INCLUDES) $(OBJS)  -o $(NAME) $(LIBGRPH) $(SDLIMG)
-	@echo "Replacing /usr/local/lib with ./lib ..."
 	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDLDYLIB) $(NAME)
 	@install_name_tool -change @rpath/SDL2_image.framework/Versions/A/SDL2_image $(SDLIMG) $(NAME)
 	@install_name_tool -change lib/libsdl/SDL2 $(SDLDYLIB) $(SDLIMG)
-
 
 $(LIB):
 	make -C lib/libft/

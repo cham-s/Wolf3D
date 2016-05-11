@@ -31,20 +31,7 @@ int		create_window(t_winfo *w, char *title, int flags)
 		ft_putendl_fd(SDL_GetError(), 2);
 		return (EXIT_ERROR);
 	}
-	//w->screen = SDL_GetWindowSurface(w->window);
 	w->all_info += 1;
-	return (0);
-}
-
-int		load_media(SDL_Surface *img, char *img_path)
-{
-	img = SDL_LoadBMP(img_path);
-	if (img == NULL)
-	{
-		ft_putstr_fd("Failed to load BMP: ", 2);
-		ft_putendl_fd(SDL_GetError(), 2);
-		return (EXIT_ERROR);
-	}
 	return (0);
 }
 
