@@ -1,6 +1,7 @@
 #ifndef WOLF3D_H
 # define WOLF3D_H
 # include "SDL2/SDL.h"
+# include "SDL2/SDL_Image.h"
 # include "libft.h"
 
 # define NO_FLAG 0
@@ -19,6 +20,7 @@ typedef struct	s_winfo
 {
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
+	SDL_Surface		*screen;
 	SDL_Point		pos;
 	SDL_Point		size;
 	char			*title;
@@ -40,5 +42,8 @@ int		create_renderer(t_winfo *w, int index, int flags);
 int		create_window(t_winfo *w, char *title, int flags);
 void	init_window_info(t_winfo *w, int pos_x, int pos_y, int size_x, int size_y);
 int		init_sdl(void);
+void	quit(t_winfo *w);
+int		load_media(SDL_Surface *img, char *img_path);
+void	loop(t_winfo *w);
 
 #endif
