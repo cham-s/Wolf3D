@@ -8,6 +8,9 @@
 # define ALL_INFO_INIT 3
 # define FIRST_MATCH -1
 
+# define WIDTH 900
+# define HEIGHT 700 
+
 typedef	struct	s_color
 {
 	Uint8		r;
@@ -44,6 +47,5 @@ void	init_window_info(t_winfo *w, int pos_x, int pos_y, int size_x, int size_y);
 int		init_sdl(void);
 void	quit(t_winfo *w);
 int		load_media(SDL_Surface *img, char *img_path);
-void	loop(t_winfo *w);
 
 #endif

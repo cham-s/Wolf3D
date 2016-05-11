@@ -67,32 +67,6 @@ int		create_renderer(t_winfo *w, int index, int flags)
 	return (0);
 }
 
-void	loop(t_winfo *w)
-{
-	int 		running;
-	SDL_Surface *surfaceIMG;
-	SDL_Event	event;
-
-	surfaceIMG = NULL;
-	init_sdl();
-	surfaceIMG = IMG_Load("media/hello.bmp");
-
-	running = 1;
-	while (running)
-	{
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-				running = 0;
-		}
-		SDL_BlitSurface(surfaceIMG, NULL, w->screen, NULL);
-		SDL_UpdateWindowSurface(w->window);
-	}
-	SDL_FreeSurface(surfaceIMG);
-	surfaceIMG = NULL;
-	quit(w);
-}
-
 void	run_wolf(t_winfo *w)
 {
 	int			running;
