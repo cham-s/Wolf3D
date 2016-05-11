@@ -50,6 +50,7 @@ int		create_renderer(t_winfo *w, int index, int flags)
 		ft_putendl_fd(SDL_GetError(), 2);
 		return (EXIT_ERROR);
 	}
+	SDL_RenderSetLogicalSize(w->renderer, w->size.x, w->size.y);
 	w->all_info += 1;
 	return (0);
 }
@@ -58,15 +59,7 @@ void	run_wolf(t_winfo *w)
 {
 	int			running;
 	SDL_Event	event;
-	t_player	p;
-
-	p.name = "A Name";
-	p.live = 60;
-	p.pos.x = 20;
-	p.pos.y = 20;
-	p.pos.h = 20;
-	p.pos.w = 20;
-	running = 1;
+	static	int value = 0;
 
 	while (running)
 	{
@@ -78,17 +71,12 @@ void	run_wolf(t_winfo *w)
 			{
 				if(event.key.keysym.sym == SDLK_ESCAPE)
 					running = 0;
-				else if(event.key.keysym.sym == SDLK_RIGHT)
-					p.pos.x++;
-				else if(event.key.keysym.sym == SDLK_LEFT)
-					p.pos.x--;
 				else if(event.key.keysym.sym == SDLK_UP)
-					p.pos.y--;
+					value--;
 				else if(event.key.keysym.sym == SDLK_DOWN)
-					p.pos.y++;
-
+					value++;
 			}
 		}
-		render(w, &p.pos);
+		render(w, value);
 	}
 }

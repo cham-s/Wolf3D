@@ -11,7 +11,7 @@ int	init_all(t_winfo *w)
 	if (init_sdl() < 0)
 		return (EXIT_ERROR);
 	init_window_info(w, 100, 200, WIDTH, HEIGHT);
-	if (create_window(w, "Wolf 3D", SDL_WINDOW_SHOWN) < 0)
+	if (create_window(w, "Wolf 3D", SDL_WINDOW_RESIZABLE) < 0)
 		return (EXIT_ERROR);
 	else if (create_renderer(w, FIRST_MATCH, SDL_RENDERER_ACCELERATED) < 0)
 		return (EXIT_ERROR);
@@ -21,21 +21,16 @@ int	init_all(t_winfo *w)
 
 void	setup_renderer(t_winfo *w, t_color *c)
 {
-	SDL_RenderSetLogicalSize(w->renderer, w->size.x, w->size.y);
 	SDL_SetRenderDrawColor(w->renderer, c->r, c->g, c->b, c->a);
 }
 
 // doing the drawing here
-void	render(t_winfo *w, SDL_Rect *player_pos)
+void	render(t_winfo *w, int y_pos)
 {
-	(void)player_pos;
-	// set the clear color
 	SDL_SetRenderDrawColor(w->renderer, 0, 0, 255, 255);
-	//clear screen
 	SDL_RenderClear(w->renderer);
-	// color of point
 	SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
-	/* SDL_RenderFillRect(w->renderer, player_pos); */
+	// test
 	SDL_Point p;
 	p.x = 0;
 	p.y = 0;
@@ -43,7 +38,7 @@ void	render(t_winfo *w, SDL_Rect *player_pos)
 	{
 		while (p.y < w->size.y)
 		{
-			if (p.y == 8)
+			if (p.y == y_pos)
 				SDL_RenderDrawPoint(w->renderer, p.x, p.y);
 			p.y++;
 		}
