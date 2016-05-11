@@ -37,6 +37,43 @@ typedef struct	s_winfo
 	int				all_info;
 }					t_winfo;
 
+typedef	struct	s_map_info
+{
+	int		world_map[MAP_W][MAP_H];
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	time;
+	double	oldtime;
+	int		hit;
+	int		step_x;
+	int		step_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		side;
+	int		map_x;
+	int		map_y;
+	double	perp_wall_dist;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		line_height;
+	int		draw_start;
+	t_color	wall_color;
+}				t_map_info;
+
+typedef struct	s_ray_info
+{
+	double	camera_x;
+	double	ray_pos_x;
+	double	ray_pos_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	width;
+}				t_ray_info;
+
 int		init_all(t_winfo *w);
 void	setup_renderer(t_winfo *w, t_color *c);
 void	run_wolf(t_winfo *w);
@@ -47,5 +84,5 @@ int		init_sdl(void);
 void	quit(t_winfo *w);
 int		load_media(SDL_Surface *img, char *img_path);
 void	render(t_winfo *w, int y_pos);
-
+void	init_map_info(t_map_info *mi);
 #endif
