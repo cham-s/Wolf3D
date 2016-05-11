@@ -4,6 +4,8 @@
 *.obj
 *.elf
 
+._*
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -28,3 +30,4 @@
 
 # binary name
 wolf3d
+lib/libft/libft.a
