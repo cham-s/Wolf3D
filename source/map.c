@@ -1,15 +1,5 @@
 #include "wolf3d.h"
 
-void	init_map_info(t_map_info *mi)
-{
-	mi->pos_x = 22;
-	mi->pos_y = 12;
-	mi->dir_x = -1;
-	mi->dir_y = 0;
-	mi->plane_x = 0;
-	mi->plane_y = 0.66 ;
-}
-
 void	calculate_step(t_ray_info *ri, t_map_info *mi)
 {
 	if (ri->ray_dir_x < 0)
@@ -50,9 +40,6 @@ void	calculate_ray_pos(t_ray_info *ri, t_map_info *mi)
 	mi->hit = 0;
 	calculate_step(ri, mi);
 }
-//
-#define MAP_W 24
-#define MAP_H 24
 
 void	perform_dda(t_map_info *mi, int world_map[MAP_W][MAP_H])
 {
@@ -171,47 +158,6 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,  int world_map[MAP_H][
 		mi->x++;
 	}
 }
-void	move_forward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W])
-{
-	if (world_map[(int)(mi->pos_x + mi->dir_x * ti->move_speed)][(int)mi->pos_y] == 0)
-		mi->pos_x += mi->dir_x * ti->move_speed;
-	if (world_map[(int)mi->pos_x][(int)(mi->pos_y + mi->dir_y * ti->move_speed)] == 0)
-		mi->pos_y += mi->dir_y * ti->move_speed;
-}
-
-void	move_backward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W])
-{
-	if (world_map[(int)(mi->pos_x - mi->dir_x * ti->move_speed)][(int)mi->pos_y] == 0)
-		mi->pos_x -= mi->dir_x * ti->move_speed;
-	if (world_map[(int)mi->pos_x][(int)(mi->pos_y - mi->dir_y * ti->move_speed)] == 0)
-		mi->pos_y -= mi->dir_y * ti->move_speed;
-}
-
-void	turn_right(t_map_info *mi, t_time_info *ti)
-{
-	double old_dir_x;
-	double old_plane_x;
-
-	old_dir_x = mi->dir_x;
-	old_plane_x = mi->plane_x;
-	mi->dir_x = mi->dir_x * cos(-ti->rot_speed) - mi->dir_y * sin(-ti->rot_speed);
-	mi->dir_y = old_dir_x * sin(-ti->rot_speed) + mi->dir_y * cos(-ti->rot_speed); 
-	mi->plane_x = mi->plane_x * cos(-ti->rot_speed) - mi->plane_y * sin(-ti->rot_speed);
-	mi->plane_y = old_plane_x * sin(-ti->rot_speed) + mi->plane_y * cos(-ti->rot_speed); 
-}
-
-void	turn_left(t_map_info *mi, t_time_info *ti)
-{
-	double old_dir_x;
-	double old_plane_x;
-
-	old_dir_x = mi->dir_x;
-	old_plane_x = mi->plane_x;
-	mi->dir_x = mi->dir_x * cos(ti->rot_speed) - mi->dir_y * sin(ti->rot_speed);
-	mi->dir_y = old_dir_x * sin(ti->rot_speed) + mi->dir_y * cos(ti->rot_speed); 
-	mi->plane_x = mi->plane_x * cos(-ti->rot_speed) - mi->plane_y * sin(ti->rot_speed);
-	mi->plane_y = old_plane_x * sin(-ti->rot_speed) + mi->plane_y * cos(ti->rot_speed); 
-}
 
 void	draw(t_winfo *w)
 {
@@ -255,14 +201,7 @@ void	draw(t_winfo *w)
 	ti.oldtime = 0;
 	while (running)
 	{
-		ti.oldtime = ti.time;
-		ti.time = SDL_GetTicks();
-		ti.frame_time = (ti.time - ti.oldtime) / 1000.0;
-		//double res = 1.0 / ti.frame_time;
-		//show fps on screen
-		printf("fps: %lf\n", res);
-		ti.move_speed = ti.frame_time * 5.0;
-		ti.rot_speed = ti.frame_time * 3.0;
+		change_time_values(&ti);
 		while (SDL_PollEvent(&event))
 		{
 			if (event.type == SDL_QUIT)

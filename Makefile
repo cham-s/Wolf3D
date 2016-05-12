@@ -18,6 +18,8 @@ OBJS 		:=	$(OBJDIR)/main.o \
 				$(OBJDIR)/init.o \
 				$(OBJDIR)/init2.o \
 				$(OBJDIR)/map.o \
+				$(OBJDIR)/init_map.o \
+				$(OBJDIR)/move_events.o \
 
 .PHONY: all clean fclean re
 

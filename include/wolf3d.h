@@ -83,6 +83,10 @@ typedef struct	s_ray_info
 	double	width;
 }				t_ray_info;
 
+//
+#define MAP_W 24
+#define MAP_H 24
+
 int		init_all(t_winfo *w);
 void	clear_screen(t_winfo *w, t_color *c);
 void	run_wolf(t_winfo *w);
@@ -97,4 +101,9 @@ void	init_map_info(t_map_info *mi);
 void	draw(t_winfo *w);
 //void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri);
 int		draw_line(t_winfo *w, int x, int start, int end, t_color *c);
+void	change_time_values(t_time_info *ti);
+void	turn_left(t_map_info *mi, t_time_info *ti);
+void	turn_right(t_map_info *mi, t_time_info *ti);
+void	move_backward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W]);
+void	move_forward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W]);
 #endif
