@@ -47,8 +47,6 @@ typedef	struct	s_map_info
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	double	time;
-	double	oldtime;
 	int		hit;
 	int		step_x;
 	int		step_y;
@@ -65,6 +63,15 @@ typedef	struct	s_map_info
 	int		draw_end;
 	t_color	wall_color;
 }				t_map_info;
+
+typedef	struct	s_time_info
+{
+	double	time;
+	double	oldtime;
+	double	frame_time;
+	double	move_speed;
+	double	rot_speed;
+}				t_time_info;
 
 typedef struct	s_ray_info
 {
@@ -88,6 +95,6 @@ int		load_media(SDL_Surface *img, char *img_path);
 void	render(t_winfo *w, int y_pos);
 void	init_map_info(t_map_info *mi);
 void	draw(t_winfo *w);
-void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri);
-void	draw_line(t_winfo *w, int x, int start, int end, t_color *c);
+//void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri);
+int		draw_line(t_winfo *w, int x, int start, int end, t_color *c);
 #endif
