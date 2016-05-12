@@ -17,6 +17,7 @@ SDL2		:= $(LIBDIR)/$(SDLIBDIR)/SDL2
 OBJS 		:=	$(OBJDIR)/main.o \
 				$(OBJDIR)/init.o \
 				$(OBJDIR)/init2.o \
+				$(OBJDIR)/map.o \
 
 .PHONY: all clean fclean re
 

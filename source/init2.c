@@ -15,13 +15,14 @@ int	init_all(t_winfo *w)
 		return (EXIT_ERROR);
 	else if (create_renderer(w, FIRST_MATCH, SDL_RENDERER_ACCELERATED) < 0)
 		return (EXIT_ERROR);
-	setup_renderer(w, &c);
+	clear_screen(w, &c);
 	return (0);
 }
 
-void	setup_renderer(t_winfo *w, t_color *c)
+void	clear_screen(t_winfo *w, t_color *c)
 {
 	SDL_SetRenderDrawColor(w->renderer, c->r, c->g, c->b, c->a);
+	SDL_RenderClear(w->renderer);
 }
 
 // doing the drawing here

@@ -7,6 +7,6 @@ int	main(int ac, char **av)
 	(void)ac;
 	(void)av;
 	init_all(&w);
-	run_wolf(&w);
+	draw(&w);
 	return (EXIT_SUCCESS);
 }

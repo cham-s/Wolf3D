@@ -8,8 +8,8 @@
 # define ALL_INFO_INIT 3
 # define FIRST_MATCH -1
 
-# define WIDTH 900
-# define HEIGHT 700 
+# define WIDTH 515 
+# define HEIGHT 384 
 
 typedef	struct	s_color
 {
@@ -35,11 +35,12 @@ typedef struct	s_winfo
 	SDL_Point		size;
 	char			*title;
 	int				all_info;
+	t_color			clear_c;
 }					t_winfo;
 
 typedef	struct	s_map_info
 {
-	int		world_map[MAP_W][MAP_H];
+	int		x;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
@@ -61,6 +62,7 @@ typedef	struct	s_map_info
 	double	delta_dist_y;
 	int		line_height;
 	int		draw_start;
+	int		draw_end;
 	t_color	wall_color;
 }				t_map_info;
 
@@ -75,7 +77,7 @@ typedef struct	s_ray_info
 }				t_ray_info;
 
 int		init_all(t_winfo *w);
-void	setup_renderer(t_winfo *w, t_color *c);
+void	clear_screen(t_winfo *w, t_color *c);
 void	run_wolf(t_winfo *w);
 int		create_renderer(t_winfo *w, int index, int flags);
 int		create_window(t_winfo *w, char *title, int flags);
@@ -85,4 +87,7 @@ void	quit(t_winfo *w);
 int		load_media(SDL_Surface *img, char *img_path);
 void	render(t_winfo *w, int y_pos);
 void	init_map_info(t_map_info *mi);
+void	draw(t_winfo *w);
+void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri);
+void	draw_line(t_winfo *w, int x, int start, int end, t_color *c);
 #endif
