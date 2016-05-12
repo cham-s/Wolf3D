@@ -187,6 +187,32 @@ void	move_backward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W]
 		mi->pos_y -= mi->dir_y * ti->move_speed;
 }
 
+void	turn_right(t_map_info *mi, t_time_info *ti)
+{
+	double old_dir_x;
+	double old_plane_x;
+
+	old_dir_x = mi->dir_x;
+	old_plane_x = mi->plane_x;
+	mi->dir_x = mi->dir_x * cos(-ti->rot_speed) - mi->dir_y * sin(-ti->rot_speed);
+	mi->dir_y = old_dir_x * sin(-ti->rot_speed) + mi->dir_y * cos(-ti->rot_speed); 
+	mi->plane_x = mi->plane_x * cos(-ti->rot_speed) - mi->plane_y * sin(-ti->rot_speed);
+	mi->plane_y = old_plane_x * sin(-ti->rot_speed) + mi->plane_y * cos(-ti->rot_speed); 
+}
+
+void	turn_left(t_map_info *mi, t_time_info *ti)
+{
+	double old_dir_x;
+	double old_plane_x;
+
+	old_dir_x = mi->dir_x;
+	old_plane_x = mi->plane_x;
+	mi->dir_x = mi->dir_x * cos(ti->rot_speed) - mi->dir_y * sin(ti->rot_speed);
+	mi->dir_y = old_dir_x * sin(ti->rot_speed) + mi->dir_y * cos(ti->rot_speed); 
+	mi->plane_x = mi->plane_x * cos(-ti->rot_speed) - mi->plane_y * sin(ti->rot_speed);
+	mi->plane_y = old_plane_x * sin(-ti->rot_speed) + mi->plane_y * cos(ti->rot_speed); 
+}
+
 void	draw(t_winfo *w)
 {
 	//malloc instead?
@@ -223,7 +249,6 @@ void	draw(t_winfo *w)
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
 
-	ti.time = 0;
 	running = 1;
 	init_map_info(&mi);
 	ti.time = 0;
@@ -233,9 +258,9 @@ void	draw(t_winfo *w)
 		ti.oldtime = ti.time;
 		ti.time = SDL_GetTicks();
 		ti.frame_time = (ti.time - ti.oldtime) / 1000.0;
-		double res = 1.0 / ti.frame_time;
-		printf("fps: %lf\n", res);
+		//double res = 1.0 / ti.frame_time;
 		//show fps on screen
+		printf("fps: %lf\n", res);
 		ti.move_speed = ti.frame_time * 5.0;
 		ti.rot_speed = ti.frame_time * 3.0;
 		while (SDL_PollEvent(&event))
@@ -250,6 +275,10 @@ void	draw(t_winfo *w)
 					move_forward(&mi, &ti, world_map);
 				else if (event.key.keysym.sym == SDLK_DOWN)
 					move_backward(&mi, &ti, world_map);
+				else if (event.key.keysym.sym == SDLK_RIGHT)
+					turn_right(&mi, &ti);
+				else if (event.key.keysym.sym == SDLK_LEFT)
+					turn_left(&mi, &ti);
 			}
 		}
 		draw_map(w, &mi, &ri, world_map);
