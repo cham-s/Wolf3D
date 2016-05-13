@@ -8,8 +8,8 @@
 # define ALL_INFO_INIT 3
 # define FIRST_MATCH -1
 
-# define WIDTH 515 
-# define HEIGHT 384 
+# define WIDTH 1280 
+# define HEIGHT 720 
 
 typedef	struct	s_color
 {

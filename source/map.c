@@ -147,12 +147,37 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,  int world_map[MAP_H][
 		if (mi->draw_end >= HEIGHT)
 			mi->draw_end = HEIGHT - 1;
 		choose_wall_color(&mi->wall_color, world_map[mi->map_x][mi->map_y]);
-		if (mi->side == 1)
+		// grey
+		if (mi->side == 0 && ri->ray_dir_x > 0)
 		{
-			mi->wall_color.r /= 2;
-			mi->wall_color.g /= 2;
-			mi->wall_color.b /= 2;
-			mi->wall_color.a /= 2;
+			mi->wall_color.r = 123;
+			mi->wall_color.g = 136;
+			mi->wall_color.b = 139;
+			mi->wall_color.a = 255;
+		}
+		// brown
+		else if (mi->side == 0 && ri->ray_dir_x < 0)
+		{
+			mi->wall_color.r = 215;
+			mi->wall_color.g = 169;
+			mi->wall_color.b = 87;
+			mi->wall_color.a = 255;
+		}
+		// red
+		else if (mi->side == 1 && ri->ray_dir_y > 0)
+		{
+			mi->wall_color.r = 189;
+			mi->wall_color.g = 50;
+			mi->wall_color.b = 37;
+			mi->wall_color.a = 255;
+		}
+		// white
+		else
+		{
+			mi->wall_color.r = 244;
+			mi->wall_color.g = 244;
+			mi->wall_color.b = 244;
+			mi->wall_color.a = 255;
 		}
 		draw_line(w, mi->x, mi->draw_start, mi->draw_end, &mi->wall_color);
 		mi->x++;

@@ -34,7 +34,7 @@ void	turn_right(t_map_info *mi, t_time_info *ti)
 	mi->plane_x = mi->plane_x * cos(-0.0888) - mi->plane_y * sin(-0.0888);
 	mi->plane_y = old_plane_x * sin(-0.0888) + mi->plane_y * cos(-0.0888); 
 	//
-		printf("rotation speed: %lf\n", ti->move_speed);
+	printf("rotation speed: %lf\n", ti->move_speed);
 }
 
 void	turn_left(t_map_info *mi, t_time_info *ti)
