@@ -100,8 +100,34 @@ void	choose_wall_color(t_color *c, int v)
 		c->a = 255;
 	}
 }
-//
-int		draw_line(t_winfo *w, int x, int start, int end, t_color *c)
+
+/* int		draw_ceiling(t_winfo *w, int x, int end, t_color *c) */
+/* { */
+/* 	int y = 0; */
+/*  */
+/* 	(void)c; */
+/* 	SDL_SetRenderDrawColor(w->renderer, 29, 179, 203, 255); */
+/* 	while (y < end) */
+/* 	{ */
+/* 		SDL_RenderDrawPoint(w->renderer, x, y); */
+/* 		y++; */
+/* 	} */
+/* } */
+/*  */
+/* int		draw_floor(t_winfo *w, int x, int end, t_color *c) */
+/* { */
+/* 	int y = 0; */
+/*  */
+/* 	(void)c; */
+/* 	SDL_SetRenderDrawColor(w->renderer, 29, 179, 203, 255); */
+/* 	while (y < end) */
+/* 	{ */
+/* 		SDL_RenderDrawPoint(w->renderer, x, y); */
+/* 		y++; */
+/* 	} */
+/* } */
+
+int		draw_wall(t_winfo *w, int x, int start, int end, t_color *c)
 {
 	if(end < start)
 	{
@@ -124,7 +150,6 @@ int		draw_line(t_winfo *w, int x, int start, int end, t_color *c)
 	return (1);
 }
 
-
 void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,  int world_map[MAP_H][MAP_W])
 {
 	clear_screen(w, &w->clear_c);
@@ -146,6 +171,12 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,  int world_map[MAP_H][
 		mi->draw_end = mi->line_height / 2 + HEIGHT / 2;
 		if (mi->draw_end >= HEIGHT)
 			mi->draw_end = HEIGHT - 1;
+		int y = 0;
+		mi->wall_color.r = 29;
+		mi->wall_color.g = 179;
+		mi->wall_color.b = 203;
+		mi->wall_color.a = 255;
+		draw_wall(w, mi->x, y, mi->draw_start, &mi->wall_color);
 		choose_wall_color(&mi->wall_color, world_map[mi->map_x][mi->map_y]);
 		// grey
 		if (mi->side == 0 && ri->ray_dir_x > 0)
@@ -179,7 +210,13 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,  int world_map[MAP_H][
 			mi->wall_color.b = 244;
 			mi->wall_color.a = 255;
 		}
-		draw_line(w, mi->x, mi->draw_start, mi->draw_end, &mi->wall_color);
+		draw_wall(w, mi->x, mi->draw_start, mi->draw_end, &mi->wall_color);
+		// floor
+		mi->wall_color.r = 55;
+		mi->wall_color.g = 42;
+		mi->wall_color.b = 27;
+		mi->wall_color.a = 255;
+		draw_wall(w, mi->x, mi->draw_end, HEIGHT, &mi->wall_color);
 		mi->x++;
 	}
 }
