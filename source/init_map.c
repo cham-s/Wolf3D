@@ -15,6 +15,6 @@ void	change_time_values(t_time_info *ti)
 	ti->oldtime = ti->time;
 	ti->time = SDL_GetTicks();
 	ti->frame_time = (ti->time - ti->oldtime) / 1000.0;
-	ti->move_speed = ti->frame_time * 7.0;
+	ti->move_speed = ti->frame_time * 5.0;
 	ti->rot_speed = ti->frame_time * 3.0;
 }
