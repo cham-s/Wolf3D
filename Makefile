@@ -2,8 +2,10 @@ NAME		= wolf3d
 CC			= clang
 LIBDIR		= lib
 SDLIBDIR	= libsdl
-expected	=" 	lib/libsdl/libSDL2-2.0.0.dylib (compatibility version 5.0.0, current version 5.0.0)"
-out			:= "$(shell otool -L  $(NAME)| awk NR==2)"
+EXPECTED	=" 	lib/libsdl/libSDL2-2.0.0.dylib (compatibility version 5.0.0, current version 5.0.0)"
+OUTPUT		:= "$(shell otool -L  $(NAME)| awk NR==2)"
+INC			= include/wolf3d.h
+
 
 OBJDIR		= obj
 LIBSDL		= -L$(LIBDIR)/$(SDLIBDIR) -lSDL2
@@ -37,7 +39,7 @@ $(NAME): $(LIB) $(OBJS)
 $(LIB):
 	make -C lib/libft/
 
-$(OBJDIR)/%.o : %.c
+$(OBJDIR)/%.o : %.c $(INC)
 	@mkdir -p $(OBJDIR) 
 	$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 

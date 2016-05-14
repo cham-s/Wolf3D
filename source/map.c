@@ -227,8 +227,6 @@ void	draw_mini_map(t_winfo *w, t_map_info *mi,  int world_map[MAP_H][MAP_W])
 	map.w = 6 * MAP_W;
 	player.x = (int)mi->pos_x * 6 + 20;
 	player.y = (int)mi->pos_y * 6 + 20;
-	printf("pos x: %d pos y: %d\n",(int)mi->pos_x,(int)mi->pos_y  );
-	printf("map x: %d map y: %d\n",player.x, player.y);
 	player.h = 6;
 	player.w = 6;
 	wall.h = 6;

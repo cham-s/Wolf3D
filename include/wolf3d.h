@@ -25,7 +25,7 @@
 
 # define MAP_W 24
 # define MAP_H 24
-# define C_SPEED 0.0988
+# define C_SPEED 0.0989
 
 typedef	struct	s_color
 {
