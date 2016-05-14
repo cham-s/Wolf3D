@@ -25,30 +25,6 @@ void	clear_screen(t_winfo *w, t_color *c)
 	SDL_RenderClear(w->renderer);
 }
 
-// doing the drawing here
-void	render(t_winfo *w, int y_pos)
-{
-	SDL_SetRenderDrawColor(w->renderer, 0, 0, 255, 255);
-	SDL_RenderClear(w->renderer);
-	SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
-	// test
-	SDL_Point p;
-	p.x = 0;
-	p.y = 0;
-	while (p.x < w->size.x)
-	{
-		while (p.y < w->size.y)
-		{
-			if (p.y == y_pos)
-				SDL_RenderDrawPoint(w->renderer, p.x, p.y);
-			p.y++;
-		}
-		p.y = 0;
-		p.x++;
-	}
-	SDL_RenderPresent(w->renderer);
-}
-
 void	quit(t_winfo *w)
 {
 	SDL_DestroyRenderer(w->renderer);

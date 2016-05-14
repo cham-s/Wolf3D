@@ -50,7 +50,6 @@ typedef struct	s_winfo
 	SDL_Point		pos;
 	SDL_Point		size;
 	char			*title;
-	int				all_info;
 	t_color			clear_c;
 }					t_winfo;
 
@@ -123,4 +122,9 @@ void	red(t_color *c);
 void	orange(t_color *c);
 void	green(t_color *c);
 void	blue(t_color *c);
+void	perform_dda(t_map_info *mi, int world_map[MAP_W][MAP_H]);
+void	calculate_ray_pos(t_ray_info *ri, t_map_info *mi);
+void	calculate_step(t_ray_info *ri, t_map_info *mi);
+void	draw_ceiling_wall_floor(t_winfo *w, t_map_info *mi, t_ray_info *ri);
+void	face_color(t_map_info *mi, t_ray_info *ri);
 #endif
