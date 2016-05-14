@@ -10,6 +10,11 @@
 
 # define WIDTH 1280 
 # define HEIGHT 720 
+# define C_SPEED 0.0995
+
+//
+#define MAP_H 24
+#define MAP_W 24
 
 typedef	struct	s_color
 {

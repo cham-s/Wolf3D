@@ -13,7 +13,7 @@ int	init_all(t_winfo *w)
 	init_window_info(w, 100, 200, WIDTH, HEIGHT);
 	if (create_window(w, "Wolf 3D", SDL_WINDOW_RESIZABLE) < 0)
 		return (EXIT_ERROR);
-	else if (create_renderer(w, FIRST_MATCH, SDL_RENDERER_ACCELERATED) < 0)
+	else if (create_renderer(w, FIRST_MATCH, SDL_RENDERER_SOFTWARE) < 0)
 		return (EXIT_ERROR);
 	clear_screen(w, &c);
 	return (0);

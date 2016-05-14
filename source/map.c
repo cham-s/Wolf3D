@@ -101,32 +101,6 @@ void	choose_wall_color(t_color *c, int v)
 	}
 }
 
-/* int		draw_ceiling(t_winfo *w, int x, int end, t_color *c) */
-/* { */
-/* 	int y = 0; */
-/*  */
-/* 	(void)c; */
-/* 	SDL_SetRenderDrawColor(w->renderer, 29, 179, 203, 255); */
-/* 	while (y < end) */
-/* 	{ */
-/* 		SDL_RenderDrawPoint(w->renderer, x, y); */
-/* 		y++; */
-/* 	} */
-/* } */
-/*  */
-/* int		draw_floor(t_winfo *w, int x, int end, t_color *c) */
-/* { */
-/* 	int y = 0; */
-/*  */
-/* 	(void)c; */
-/* 	SDL_SetRenderDrawColor(w->renderer, 29, 179, 203, 255); */
-/* 	while (y < end) */
-/* 	{ */
-/* 		SDL_RenderDrawPoint(w->renderer, x, y); */
-/* 		y++; */
-/* 	} */
-/* } */
-
 int		draw_wall(t_winfo *w, int x, int start, int end, t_color *c)
 {
 	if(end < start)
@@ -221,6 +195,54 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,  int world_map[MAP_H][
 	}
 }
 
+void	draw_mini_map(t_winfo *w, t_map_info *mi,  int world_map[MAP_H][MAP_W])
+{
+	SDL_Rect	map;
+	SDL_Rect	wall;
+	int			end_h;
+	int			end_w;
+	int			x;
+	int			y;
+	int			i;
+	int			j;
+
+	(void)mi;
+	i = 0;
+	j = 0;
+	map.x = 20;
+	map.y = 20;
+	map.h = 6 * MAP_H;
+	map.w = 6 * MAP_W;
+	wall.h = 6;
+	wall.w = 6;
+	x = map.x;
+	end_w = 6 * MAP_W + 20;
+	end_h = 6 * MAP_H + 20;
+	SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
+	SDL_RenderFillRect(w->renderer, &map);
+	SDL_RenderDrawRect(w->renderer, &map);
+	while (x < end_w)
+	{
+		y = map.y;
+		j = 0;
+		while (y < end_h)
+		{
+			wall.x = x;
+			wall.y = y;
+			if (world_map[i][j] == 0)
+				SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
+			else
+				SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
+			SDL_RenderFillRect(w->renderer, &wall);
+			SDL_RenderDrawRect(w->renderer, &wall);
+			y += 6; 
+			j++;
+		}
+		x += 6;
+		i++;
+	}
+}
+
 void	draw(t_winfo *w)
 {
 	//malloc instead?
@@ -249,7 +271,7 @@ void	draw(t_winfo *w)
 		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -283,6 +305,7 @@ void	draw(t_winfo *w)
 			}
 		}
 		draw_map(w, &mi, &ri, world_map);
+		draw_mini_map(w, &mi, world_map);
 		SDL_RenderPresent(w->renderer);
 	}
 }
