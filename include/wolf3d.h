@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wolf3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
+/*   Updated: 2016/05/14 21:58:52 by cattouma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WOLF3D_H
 # define WOLF3D_H
 # include "SDL2/SDL.h"
@@ -10,11 +22,10 @@
 
 # define WIDTH 1280 
 # define HEIGHT 720 
-# define C_SPEED 0.0995
 
-//
-#define MAP_H 24
-#define MAP_W 24
+# define MAP_W 24
+# define MAP_H 24
+# define C_SPEED 0.0988
 
 typedef	struct	s_color
 {
@@ -88,9 +99,6 @@ typedef struct	s_ray_info
 	double	width;
 }				t_ray_info;
 
-//
-#define MAP_W 24
-#define MAP_H 24
 
 int		init_all(t_winfo *w);
 void	clear_screen(t_winfo *w, t_color *c);
@@ -104,11 +112,15 @@ int		load_media(SDL_Surface *img, char *img_path);
 void	render(t_winfo *w, int y_pos);
 void	init_map_info(t_map_info *mi);
 void	draw(t_winfo *w);
-//void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri);
 int		draw_line(t_winfo *w, int x, int start, int end, t_color *c);
 void	change_time_values(t_time_info *ti);
 void	turn_left(t_map_info *mi, t_time_info *ti);
 void	turn_right(t_map_info *mi, t_time_info *ti);
 void	move_backward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W]);
 void	move_forward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W]);
+void	violet(t_color *c);
+void	red(t_color *c);
+void	orange(t_color *c);
+void	green(t_color *c);
+void	blue(t_color *c);
 #endif

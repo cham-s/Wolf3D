@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_events.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/14 20:12:34 by cattouma          #+#    #+#             */
+/*   Updated: 2016/05/14 21:18:16 by cattouma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void	move_forward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W])
@@ -8,8 +20,6 @@ void	move_forward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W])
 	}
 	if (world_map[(int)mi->pos_x][(int)(mi->pos_y + mi->dir_y * ti->move_speed)] == 0)
 		mi->pos_y += mi->dir_y * C_SPEED;
-	//
-	printf("pos x: %d pos y: %d\n", (int)mi->pos_x, (int)mi->pos_y);
 }
 
 void	move_backward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W])
@@ -18,8 +28,6 @@ void	move_backward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W]
 		mi->pos_x -= mi->dir_x * C_SPEED;
 	if (world_map[(int)mi->pos_x][(int)(mi->pos_y - mi->dir_y * ti->move_speed)] == 0)
 		mi->pos_y -= mi->dir_y * C_SPEED;
-	//
-	printf("pos x: %d pos y: %d\n", (int)mi->pos_x, (int)mi->pos_y);
 }
 
 void	turn_right(t_map_info *mi, t_time_info *ti)

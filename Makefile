@@ -20,6 +20,7 @@ OBJS 		:=	$(OBJDIR)/main.o \
 				$(OBJDIR)/map.o \
 				$(OBJDIR)/init_map.o \
 				$(OBJDIR)/move_events.o \
+				$(OBJDIR)/colors.o \
 
 .PHONY: all clean fclean re
 
