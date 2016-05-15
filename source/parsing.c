@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:06:17 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 15:57:51 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 19:11:22 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			check_args(int ac, char *map)
 	{
 		ft_putstr_fd("usage : ", 2);
 		ft_putstr_fd(map, 2);
-		ft_putendl_fd("./fdf <map>", 2);
+		ft_putendl_fd("./wolf3d <map>", 2);
 		exit(EXIT_FAILURE);
 	}
 	if (!(ext = ft_strrchr(map, '.')))
@@ -60,10 +60,17 @@ void		check_error(int *fd, char *line, int x, int y)
 		ft_putendl_fd("Empty map", 2);
 		exit(EXIT_FAILURE);
 	}
+	if (x < 3 || y < 3)
+	{
+		ft_putendl_fd("Map too small", 2);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void		check_len_map(int x_len, t_winfo *w)
 {
+	//
+	printf("x len: %d li: %d\n", x_len, w->total_li);
 	if (x_len != w->total_li)
 	{
 		ft_putendl_fd("Map not well formatted", 2);

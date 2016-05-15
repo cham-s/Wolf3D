@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:10:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 16:37:22 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 18:46:13 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	draw_cube(t_winfo *w)
 	end_h = PIX_SIZE * w->total_col + 20;
 	wall.h =  PIX_SIZE;
 	wall.w =  PIX_SIZE;
+	printf("col: %d li: %d\n", w->total_col, w->total_li);
 	while (x < end_w)
 	{
 		y = 20;
@@ -91,15 +92,17 @@ void	draw_cube(t_winfo *w)
 		{
 			wall.x = x;
 			wall.y = y;
-			if (w->map[i][j] == 0)
+			//print
+			printf("x: %d y: %d\n", i, j);
+			if (w->map[j][i] == 0)
 				SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
-			if (w->map[i][j] == 1)
+			if (w->map[j][i] == 1)
 				SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
-			else if (w->map[i][j] == 2)
+			else if (w->map[j][i] == 2)
 				SDL_SetRenderDrawColor(w->renderer, 234, 67, 54, 255);
-			else if (w->map[i][j] == 3)
+			else if (w->map[j][i] == 3)
 				SDL_SetRenderDrawColor(w->renderer, 53, 168, 82, 255);
-			else if (w->map[i][j] == 4)
+			else if (w->map[j][i] == 4)
 				SDL_SetRenderDrawColor(w->renderer, 255, 187, 0, 255);
 			SDL_RenderFillRect(w->renderer, &wall);
 			SDL_RenderDrawRect(w->renderer, &wall);

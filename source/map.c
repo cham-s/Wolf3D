@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 17:22:58 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 18:44:02 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 		mi->x++;
 	}
 }
-
 
 void	draw(t_winfo *w)
 {
