@@ -93,14 +93,16 @@ void	draw_cube(t_winfo *w)
 			wall.y = y;
 			if (w->map[j][i] == 0)
 				SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
-			if (w->map[j][i] == 1)
-				SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
+			else if (w->map[j][i] == 1)
+				SDL_SetRenderDrawColor(w->renderer, 255, 217, 11, 255);
 			else if (w->map[j][i] == 2)
 				SDL_SetRenderDrawColor(w->renderer, 234, 67, 54, 255);
 			else if (w->map[j][i] == 3)
 				SDL_SetRenderDrawColor(w->renderer, 53, 168, 82, 255);
 			else if (w->map[j][i] == 4)
 				SDL_SetRenderDrawColor(w->renderer, 255, 187, 0, 255);
+			else 
+				SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
 			SDL_RenderFillRect(w->renderer, &wall);
 			SDL_RenderDrawRect(w->renderer, &wall);
 			y += PIX_SIZE; 

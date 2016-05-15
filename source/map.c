@@ -67,9 +67,9 @@ void	draw(t_winfo *w)
 				else if (event.key.keysym.sym == SDLK_DOWN)
 					move_backward(&mi, &ti, w);
 				else if (event.key.keysym.sym == SDLK_RIGHT)
-					turn_right(&mi, &ti);
+					turn_right(&mi);
 				else if (event.key.keysym.sym == SDLK_LEFT)
-					turn_left(&mi, &ti);
+					turn_left(&mi);
 			}
 		}
 		draw_map(w, &mi, &ri);

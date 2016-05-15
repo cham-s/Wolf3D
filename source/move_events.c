@@ -19,6 +19,7 @@ void	move_forward(t_map_info *mi, t_time_info *ti, t_winfo *w)
 		mi->pos_x += mi->dir_x * C_SPEED;
 	}
 	if (w->map[(int)mi->pos_x][(int)(mi->pos_y + mi->dir_y * ti->move_speed)] == 0)
+		mi->pos_y += mi->dir_y * C_SPEED;
 }
 
 void	move_backward(t_map_info *mi, t_time_info *ti, t_winfo *w)
@@ -29,13 +30,11 @@ void	move_backward(t_map_info *mi, t_time_info *ti, t_winfo *w)
 		mi->pos_y -= mi->dir_y * C_SPEED;
 }
 
-void	turn_right(t_map_info *mi, t_time_info *ti)
+void	turn_right(t_map_info *mi)
 {
-	double old_dir_x;
-	double old_plane_x;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	//remove?
-	(void)ti;
 	old_dir_x = mi->dir_x;
 	old_plane_x = mi->plane_x;
 	mi->dir_x = mi->dir_x * cos(-C_SPEED) - mi->dir_y * sin(-C_SPEED);
@@ -44,13 +43,11 @@ void	turn_right(t_map_info *mi, t_time_info *ti)
 	mi->plane_y = old_plane_x * sin(-C_SPEED) + mi->plane_y * cos(-C_SPEED); 
 }
 
-void	turn_left(t_map_info *mi, t_time_info *ti)
+void	turn_left(t_map_info *mi)
 {
-	double old_dir_x;
-	double old_plane_x;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	// remove?
-	(void)ti;
 	old_dir_x = mi->dir_x;
 	old_plane_x = mi->plane_x;
 	mi->dir_x = mi->dir_x * cos(C_SPEED) - mi->dir_y * sin(C_SPEED);
