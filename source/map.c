@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/14 21:25:17 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 13:10:43 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,
 		calculate_ray_pos(ri, mi);
 		perform_dda(mi, world_map);
 		if (mi->side == 0)
-			mi->perp_wall_dist = (mi->map_x - ri->ray_pos_x + (1 - mi->step_x) / 2) / ri->ray_dir_x;
+			mi->perp_wall_dist = (mi->map_x - ri->ray_pos_x +
+					(1 - mi->step_x) / 2) / ri->ray_dir_x;
 		else
-			mi->perp_wall_dist = (mi->map_y - ri->ray_pos_y + (1 - mi->step_y) / 2) / ri->ray_dir_y;
+			mi->perp_wall_dist = (mi->map_y - ri->ray_pos_y +
+					(1 - mi->step_y) / 2) / ri->ray_dir_y;
 		mi->line_height = (int)(HEIGHT / mi->perp_wall_dist);
 		mi->draw_start = -mi->line_height / 2 + HEIGHT / 2;
 		if (mi->draw_start < 0)

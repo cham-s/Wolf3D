@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/15 13:11:08 by cattouma          #+#    #+#             */
+/*   Updated: 2016/05/15 15:36:52 by cattouma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
-int	init_all(t_winfo *w)
+int			init_all(t_winfo *w)
 {
 	t_color		c;
 
@@ -19,16 +31,30 @@ int	init_all(t_winfo *w)
 	return (0);
 }
 
-void	clear_screen(t_winfo *w, t_color *c)
+void		clear_screen(t_winfo *w, t_color *c)
 {
 	SDL_SetRenderDrawColor(w->renderer, c->r, c->g, c->b, c->a);
 	SDL_RenderClear(w->renderer);
+}
+
+static void	destroy_tab(int **tab, size_t len)
+{
+	size_t i;
+
+	i = 0;
+	while (i < len)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 void	quit(t_winfo *w)
 {
 	SDL_DestroyRenderer(w->renderer);
 	SDL_DestroyWindow(w->window);
-	free(w);
+	destroy_tab(w->map, w->total_col);
+	//free(w);
 	SDL_Quit();
 }

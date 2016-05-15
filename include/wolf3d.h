@@ -6,12 +6,13 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/14 21:58:52 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 15:06:07 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
+# include <fcntl.h>
 # include "SDL2/SDL.h"
 # include "SDL2/SDL_image.h"
 # include "libft.h"
@@ -52,6 +53,9 @@ typedef struct	s_winfo
 	SDL_Point		size;
 	char			*title;
 	t_color			clear_c;
+	int				**map;
+	int				total_col;
+	int				total_li;
 }					t_winfo;
 
 typedef	struct	s_map_info
@@ -99,7 +103,6 @@ typedef struct	s_ray_info
 	double	width;
 }				t_ray_info;
 
-
 int		init_all(t_winfo *w);
 void	clear_screen(t_winfo *w, t_color *c);
 void	run_wolf(t_winfo *w);
@@ -131,4 +134,9 @@ void	face_color(t_map_info *mi, t_ray_info *ri);
 void	draw_player(t_winfo *w, t_map_info *mi);
 void	draw_cube(t_winfo *w, int world_map[MAP_H][MAP_W]);
 void	draw_mini_map(t_winfo *w, t_map_info *mi, int world_map[MAP_H][MAP_W]);
+void	get_map(char *file_name, t_winfo *w);
+int		check_args(int ac, char *map);
+void	check_len_map(int x_len, t_winfo *w);
+void	check_ret_gnl(int *fd, char *line);
+
 #endif
