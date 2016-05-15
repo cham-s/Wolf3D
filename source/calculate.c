@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:08:01 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 13:08:02 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 17:22:27 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	calculate_ray_pos(t_ray_info *ri, t_map_info *mi)
 	calculate_step(ri, mi);
 }
 
-void	perform_dda(t_map_info *mi, int world_map[MAP_W][MAP_H])
+void	perform_dda(t_map_info *mi, t_winfo *w)
 {
 	while (mi->hit == 0)
 	{
@@ -69,7 +69,7 @@ void	perform_dda(t_map_info *mi, int world_map[MAP_W][MAP_H])
 			mi->map_y += mi->step_y;
 			mi->side = 1;
 		}
-		if (world_map[mi->map_x][mi->map_y] > 0) 
+		if (w->map[mi->map_x][mi->map_y] > 0) 
 			mi->hit = 1;
 	}
 }

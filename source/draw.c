@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:10:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 13:10:52 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 16:37:22 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	draw_player(t_winfo *w, t_map_info *mi)
 	SDL_RenderDrawRect(w->renderer, &player);
 }
 
-void	draw_cube(t_winfo *w, int world_map[MAP_H][MAP_W])
+void	draw_cube(t_winfo *w)
 {
 	SDL_Rect	wall;
 	int			end_h;
@@ -79,8 +79,8 @@ void	draw_cube(t_winfo *w, int world_map[MAP_H][MAP_W])
 	x = 20;
 	i = 0;
 	j = 0;
-	end_w = PIX_SIZE * MAP_W + 20;
-	end_h = PIX_SIZE * MAP_H + 20;
+	end_w = PIX_SIZE * w->total_li + 20;
+	end_h = PIX_SIZE * w->total_col + 20;
 	wall.h =  PIX_SIZE;
 	wall.w =  PIX_SIZE;
 	while (x < end_w)
@@ -91,15 +91,15 @@ void	draw_cube(t_winfo *w, int world_map[MAP_H][MAP_W])
 		{
 			wall.x = x;
 			wall.y = y;
-			if (world_map[i][j] == 0)
+			if (w->map[i][j] == 0)
 				SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
-			if (world_map[i][j] == 1)
+			if (w->map[i][j] == 1)
 				SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
-			else if (world_map[i][j] == 2)
+			else if (w->map[i][j] == 2)
 				SDL_SetRenderDrawColor(w->renderer, 234, 67, 54, 255);
-			else if (world_map[i][j] == 3)
+			else if (w->map[i][j] == 3)
 				SDL_SetRenderDrawColor(w->renderer, 53, 168, 82, 255);
-			else if (world_map[i][j] == 4)
+			else if (w->map[i][j] == 4)
 				SDL_SetRenderDrawColor(w->renderer, 255, 187, 0, 255);
 			SDL_RenderFillRect(w->renderer, &wall);
 			SDL_RenderDrawRect(w->renderer, &wall);
@@ -111,17 +111,17 @@ void	draw_cube(t_winfo *w, int world_map[MAP_H][MAP_W])
 	}
 }
 
-void	draw_mini_map(t_winfo *w, t_map_info *mi, int world_map[MAP_H][MAP_W])
+void	draw_mini_map(t_winfo *w, t_map_info *mi)
 {
-	SDL_Rect	map;
+	SDL_Rect	mini_map;
 
-	map.x = 20;
-	map.y = 20;
-	map.h = PIX_SIZE * MAP_H;
-	map.w = PIX_SIZE * MAP_W;
+	mini_map.x = 20;
+	mini_map.y = 20;
+	mini_map.h = PIX_SIZE * w->total_col;
+	mini_map.w = PIX_SIZE * w->total_li;
 	SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(w->renderer, &map);
-	SDL_RenderDrawRect(w->renderer, &map);
-	draw_cube(w, world_map);
+	SDL_RenderFillRect(w->renderer, &mini_map);
+	SDL_RenderDrawRect(w->renderer, &mini_map);
+	draw_cube(w);
 	draw_player(w, mi);
 }

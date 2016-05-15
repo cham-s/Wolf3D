@@ -6,21 +6,20 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 13:10:43 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 17:22:58 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,
-		int world_map[MAP_H][MAP_W])
+static void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 {
 	clear_screen(w, &w->clear_c);
 	mi->x = 0;
 	while (mi->x < WIDTH)
 	{
 		calculate_ray_pos(ri, mi);
-		perform_dda(mi, world_map);
+		perform_dda(mi, w);
 		if (mi->side == 0)
 			mi->perp_wall_dist = (mi->map_x - ri->ray_pos_x +
 					(1 - mi->step_x) / 2) / ri->ray_dir_x;
@@ -48,33 +47,6 @@ void	draw(t_winfo *w)
 	t_time_info	ti;
 	int			running;
 	SDL_Event	event;
-	int world_map[MAP_W][MAP_H]=
-	{
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
 
 	running = 1;
 	init_map_info(&mi);
@@ -92,17 +64,17 @@ void	draw(t_winfo *w)
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 					running = 0;
 				else if (event.key.keysym.sym == SDLK_UP)
-					move_forward(&mi, &ti, world_map);
+					move_forward(&mi, &ti, w);
 				else if (event.key.keysym.sym == SDLK_DOWN)
-					move_backward(&mi, &ti, world_map);
+					move_backward(&mi, &ti, w);
 				else if (event.key.keysym.sym == SDLK_RIGHT)
 					turn_right(&mi, &ti);
 				else if (event.key.keysym.sym == SDLK_LEFT)
 					turn_left(&mi, &ti);
 			}
 		}
-		draw_map(w, &mi, &ri, world_map);
-		draw_mini_map(w, &mi, world_map);
+		draw_map(w, &mi, &ri);
+		draw_mini_map(w, &mi);
 		SDL_RenderPresent(w->renderer);
 	}
 }

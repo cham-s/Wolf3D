@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:19:16 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 15:53:46 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 17:48:50 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void		get_points(t_winfo *w, int *fd, char *line)
 	int		x;
 	int		y;
 	char	**split;
+	int		val;
 
 	x = 0;
 	y = 0;
@@ -52,7 +53,14 @@ static void		get_points(t_winfo *w, int *fd, char *line)
 		w->map[y] = (int *)malloc(sizeof(int) * w->total_li);
 		while (x < w->total_li)
 		{
-			w->map[y][x] = ft_atoi(split[x]);
+			val = ft_atoi(split[x]);
+			if (!val && (x == 0 || y == 0 || y == w->total_col - 1 || x == w->total_li - 1))
+			{
+				ft_putendl_fd("Not a valid file", 2);
+				exit(EXIT_FAILURE);
+			}
+
+			w->map[y][x] = val;
 			x++;
 		}
 		tab_free(split);

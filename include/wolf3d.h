@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 15:45:01 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 16:21:47 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # define WIDTH 1280 
 # define HEIGHT 720 
 
-# define MAP_W 24
-# define MAP_H 24
 # define C_SPEED 0.0989
 # define PIX_SIZE 6
 
@@ -119,21 +117,21 @@ int		draw_line(t_winfo *w, int x, int start, int end, t_color *c);
 void	change_time_values(t_time_info *ti);
 void	turn_left(t_map_info *mi, t_time_info *ti);
 void	turn_right(t_map_info *mi, t_time_info *ti);
-void	move_backward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W]);
-void	move_forward(t_map_info *mi, t_time_info *ti,  int world_map[MAP_H][MAP_W]);
+void	move_backward(t_map_info *mi, t_time_info *ti, t_winfo *w);
+void	move_forward(t_map_info *mi, t_time_info *ti, t_winfo *w);
 void	violet(t_color *c);
 void	red(t_color *c);
 void	orange(t_color *c);
 void	green(t_color *c);
 void	blue(t_color *c);
-void	perform_dda(t_map_info *mi, int world_map[MAP_W][MAP_H]);
+void	perform_dda(t_map_info *mi, t_winfo *w);
 void	calculate_ray_pos(t_ray_info *ri, t_map_info *mi);
 void	calculate_step(t_ray_info *ri, t_map_info *mi);
 void	draw_ceiling_wall_floor(t_winfo *w, t_map_info *mi, t_ray_info *ri);
 void	face_color(t_map_info *mi, t_ray_info *ri);
 void	draw_player(t_winfo *w, t_map_info *mi);
-void	draw_cube(t_winfo *w, int world_map[MAP_H][MAP_W]);
-void	draw_mini_map(t_winfo *w, t_map_info *mi, int world_map[MAP_H][MAP_W]);
+void	draw_cube(t_winfo *w);
+void	draw_mini_map(t_winfo *w, t_map_info *mi);
 void	get_map(char *file_name, t_winfo *w);
 int		check_args(int ac, char *map);
 void	check_len_map(int x_len, t_winfo *w);
