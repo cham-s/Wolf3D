@@ -48,7 +48,7 @@ void	draw(t_winfo *w)
 	SDL_Event	event;
 
 	running = 1;
-	init_map_info(&mi);
+	init_map_info(&mi, w);
 	ti.time = 0;
 	ti.oldtime = 0;
 	while (running)

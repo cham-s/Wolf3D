@@ -57,8 +57,8 @@ void	draw_player(t_winfo *w, t_map_info *mi)
 {
 	SDL_Rect	player;
 
-	player.x = (int)mi->pos_x * PIX_SIZE + 20;
-	player.y = (int)mi->pos_y * PIX_SIZE + 20;
+	player.x = (int)mi->pos_y * PIX_SIZE + 20;
+	player.y = (int)mi->pos_x * PIX_SIZE + 20;
 	player.h = PIX_SIZE;
 	player.w = PIX_SIZE;
 	SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
@@ -83,7 +83,6 @@ void	draw_cube(t_winfo *w)
 	end_h = PIX_SIZE * w->total_col + 20;
 	wall.h =  PIX_SIZE;
 	wall.w =  PIX_SIZE;
-	printf("col: %d li: %d\n", w->total_col, w->total_li);
 	while (x < end_w)
 	{
 		y = 20;
@@ -92,8 +91,6 @@ void	draw_cube(t_winfo *w)
 		{
 			wall.x = x;
 			wall.y = y;
-			//print
-			printf("x: %d y: %d\n", i, j);
 			if (w->map[j][i] == 0)
 				SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
 			if (w->map[j][i] == 1)

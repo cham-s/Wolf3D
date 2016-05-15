@@ -111,7 +111,7 @@ int		init_sdl(void);
 void	quit(t_winfo *w);
 int		load_media(SDL_Surface *img, char *img_path);
 void	render(t_winfo *w, int y_pos);
-void	init_map_info(t_map_info *mi);
+void	init_map_info(t_map_info *mi, t_winfo *w);
 void	draw(t_winfo *w);
 int		draw_line(t_winfo *w, int x, int start, int end, t_color *c);
 void	change_time_values(t_time_info *ti);

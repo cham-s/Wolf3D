@@ -8,7 +8,7 @@ void	init_map_info(t_map_info *mi, t_winfo *w)
 	mi->dir_y = 0;
 	mi->plane_x = 0;
 	mi->plane_y = 0.66 ;
-	if (w->map[mi->pos_x][mi->pos_y])
+	if (w->map[(int)mi->pos_x][(int)mi->pos_y])
 	{
 		ft_putendl_fd("starting location blocked by a wall", 2);
 		exit(EXIT_FAILURE);

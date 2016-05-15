@@ -69,8 +69,6 @@ void		check_error(int *fd, char *line, int x, int y)
 
 void		check_len_map(int x_len, t_winfo *w)
 {
-	//
-	printf("x len: %d li: %d\n", x_len, w->total_li);
 	if (x_len != w->total_li)
 	{
 		ft_putendl_fd("Map not well formatted", 2);
