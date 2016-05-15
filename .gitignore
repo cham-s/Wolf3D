@@ -5,6 +5,7 @@
 *.elf
 
 ._*
+~
 
 # Precompiled Headers
 *.gch
@@ -24,7 +25,7 @@
 *.x86_64
 *.hex
 
-test
+test.w3d
 
 # Debug files
 *.dSYM/

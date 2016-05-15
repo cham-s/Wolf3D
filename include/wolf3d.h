@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 15:06:07 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 15:45:01 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,6 @@ void	draw_mini_map(t_winfo *w, t_map_info *mi, int world_map[MAP_H][MAP_W]);
 void	get_map(char *file_name, t_winfo *w);
 int		check_args(int ac, char *map);
 void	check_len_map(int x_len, t_winfo *w);
-void	check_ret_gnl(int *fd, char *line);
+void	check_error(int *fd, char *line, int x, int y);
 
 #endif

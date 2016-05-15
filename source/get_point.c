@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:19:16 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 15:38:22 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/15 15:53:46 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static	void	init_points(char *file_name, t_winfo *w)
 		check_len_map(x_len, w);
 		free(line);
 	}
-	check_ret_gnl(&fd, line);
+	check_error(&fd, line, x_len, i);
 	w->total_col = i;
 	close(fd);
 }
