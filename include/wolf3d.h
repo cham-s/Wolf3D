@@ -26,6 +26,7 @@
 # define MAP_W 24
 # define MAP_H 24
 # define C_SPEED 0.0989
+# define PIX_SIZE 6
 
 typedef	struct	s_color
 {
@@ -127,4 +128,7 @@ void	calculate_ray_pos(t_ray_info *ri, t_map_info *mi);
 void	calculate_step(t_ray_info *ri, t_map_info *mi);
 void	draw_ceiling_wall_floor(t_winfo *w, t_map_info *mi, t_ray_info *ri);
 void	face_color(t_map_info *mi, t_ray_info *ri);
+void	draw_player(t_winfo *w, t_map_info *mi);
+void	draw_cube(t_winfo *w, int world_map[MAP_H][MAP_W]);
+void	draw_mini_map(t_winfo *w, t_map_info *mi, int world_map[MAP_H][MAP_W]);
 #endif

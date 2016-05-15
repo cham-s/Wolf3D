@@ -12,45 +12,6 @@
 
 #include "wolf3d.h"
 
-/* void	choose_wall_color(t_color *c, int v) */
-/* { */
-/* 	if (v == 1) */
-/* 	{ */
-/* 		c->r = 255; */
-/* 		c->g = 0; */
-/* 		c->b = 0; */
-/* 		c->a = 255; */
-/* 	} */
-/* 	else if (v == 2) */
-/* 	{ */
-/* 		c->r = 0; */
-/* 		c->g = 255; */
-/* 		c->b = 0; */
-/* 		c->a = 255; */
-/* 	} */
-/* 	else if (v == 3) */
-/* 	{ */
-/* 		c->r = 0; */
-/* 		c->g = 0; */
-/* 		c->b = 255; */
-/* 		c->a = 255; */
-/* 	} */
-/* 	else if (v == 4) */
-/* 	{ */
-/* 		c->r = 0; */
-/* 		c->g = 0; */
-/* 		c->b = 0; */
-/* 		c->a = 255; */
-/* 	} */
-/* 	else */
-/* 	{ */
-/* 		c->r = 255; */
-/* 		c->g = 255; */
-/* 		c->b = 0; */
-/* 		c->a = 255; */
-/* 	} */
-/* } */
-
 void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,
 		int world_map[MAP_H][MAP_W])
 {
@@ -72,76 +33,10 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri,
 		if (mi->draw_end >= HEIGHT)
 			mi->draw_end = HEIGHT - 1;
 		draw_ceiling_wall_floor(w, mi, ri);
-		//choose_wall_color(&mi->wall_color, world_map[mi->map_x][mi->map_y]);
 		mi->x++;
 	}
 }
 
-void	draw_mini_map(t_winfo *w, t_map_info *mi,  int world_map[MAP_H][MAP_W])
-{
-	SDL_Rect	map;
-	SDL_Rect	wall;
-	SDL_Rect	player;
-	int			end_h;
-	int			end_w;
-	int			x;
-	int			y;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	map.x = 20;
-	map.y = 20;
-	map.h = 6 * MAP_H;
-	map.w = 6 * MAP_W;
-	player.x = (int)mi->pos_x * 6 + 20;
-	player.y = (int)mi->pos_y * 6 + 20;
-	player.h = 6;
-	player.w = 6;
-	wall.h = 6;
-	wall.w = 6;
-	x = map.x;
-	end_w = 6 * MAP_W + 20;
-	end_h = 6 * MAP_H + 20;
-	SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(w->renderer, &map);
-	SDL_RenderDrawRect(w->renderer, &map);
-	while (x < end_w)
-	{
-		y = map.y;
-		j = 0;
-		while (y < end_h)
-		{
-			wall.x = x;
-			wall.y = y;
-			if (world_map[i][j] == 0)
-				// white
-				SDL_SetRenderDrawColor(w->renderer, 255, 255, 255, 255);
-			if (world_map[i][j] == 1)
-				//black
-				SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
-			else if (world_map[i][j] == 2)
-				//red
-				SDL_SetRenderDrawColor(w->renderer, 234, 67, 54, 255);
-			else if (world_map[i][j] == 3)
-				//green
-				SDL_SetRenderDrawColor(w->renderer, 53, 168, 82, 255);
-			else if (world_map[i][j] == 4)
-				//vlet
-				SDL_SetRenderDrawColor(w->renderer, 255, 187, 0, 255);
-			SDL_RenderFillRect(w->renderer, &wall);
-			SDL_RenderDrawRect(w->renderer, &wall);
-			y += 6; 
-			j++;
-		}
-		x += 6;
-		i++;
-	}
-	SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
-	SDL_RenderFillRect(w->renderer, &player);
-	SDL_RenderDrawRect(w->renderer, &player);
-}
 
 void	draw(t_winfo *w)
 {
