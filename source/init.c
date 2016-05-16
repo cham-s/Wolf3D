@@ -21,15 +21,33 @@ int		load_audio(t_winfo *w)
 		exit(EXIT_FAILURE);
 	}
 	w->step = Mix_LoadWAV("media/sound/walk_s.wav");
-	if (!w->music)
+	if (!w->step)
 	{
 		ft_putendl_fd("Failed to load step sound effect", 2);
 		exit(EXIT_FAILURE);
 	}
 	w->winning = Mix_LoadWAV("media/sound/winning.wav");
-	if (!w->music)
+	if (!w->winning)
 	{
-		ft_putendl_fd("Failed to load step sound effect", 2);
+		ft_putendl_fd("Failed to load winning sound effect", 2);
+		exit(EXIT_FAILURE);
+	}
+	w->escape = Mix_LoadWAV("media/sound/escape.wav");
+	if (!w->escape)
+	{
+		ft_putendl_fd("Failed to load escape sound effect", 2);
+		exit(EXIT_FAILURE);
+	}
+	w->move = Mix_LoadWAV("media/sound/move.wav");
+	if (!w->move)
+	{
+		ft_putendl_fd("Failed to load move sound effect", 2);
+		exit(EXIT_FAILURE);
+	}
+	w->start = Mix_LoadWAV("media/sound/enter.wav");
+	if (!w->move)
+	{
+		ft_putendl_fd("Failed to load enter sound effect", 2);
 		exit(EXIT_FAILURE);
 	}
 	return (0);

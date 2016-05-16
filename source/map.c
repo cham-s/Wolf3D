@@ -46,7 +46,10 @@ void	directions_key(t_winfo *w, t_time_info *ti, t_map_info *mi, SDL_Event *even
 	if (event->key.keysym.sym == SDLK_ESCAPE && w->first)
 		w->running = 0;
 	else if (event->key.keysym.sym == SDLK_ESCAPE && !w->show_menu)
+	{
+		Mix_PlayChannel(-1, w->escape, 0);
 		w->show_menu = 1;
+	}
 	else if (event->key.keysym.sym == SDLK_ESCAPE && w->show_menu)
 	{
 		w->show_menu = 0;
@@ -55,14 +58,20 @@ void	directions_key(t_winfo *w, t_time_info *ti, t_map_info *mi, SDL_Event *even
 	else if (event->key.keysym.sym == SDLK_UP)
 	{
 		if (w->show_menu)
+		{
 			w->index = w->index == 0 ? 1 : 0;
+			Mix_PlayChannel(-1, w->move, 0);
+		}
 		else
 			move_forward(mi, ti, w);
 	}
 	else if (event->key.keysym.sym == SDLK_DOWN)
 	{
 		if (w->show_menu)
+		{
 			w->index = w->index == 0 ? 1 : 0;
+			Mix_PlayChannel(-1, w->move, 0);
+		}
 		else
 			move_backward(mi, ti, w);
 	}
@@ -80,6 +89,7 @@ void	enter_key(t_winfo *w, SDL_Event *event)
 	else if (event->key.keysym.sym == SDLK_RETURN &&
 				w->index == 0 && w->show_menu)
 	{
+		Mix_PlayChannel(-1, w->start, 0);
 		w->index = 0;
 		w->show_menu = 0;
 	}

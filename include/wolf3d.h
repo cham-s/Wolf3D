@@ -56,6 +56,9 @@ typedef struct	s_winfo
 	Mix_Music		*music;	
 	Mix_Chunk		*step;
 	Mix_Chunk		*winning;
+	Mix_Chunk		*escape;
+	Mix_Chunk		*move;
+	Mix_Chunk		*start;
 	SDL_Texture		*menu_start;
 	SDL_Texture		*menu_exit;
 	char			*map_name;
