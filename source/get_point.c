@@ -59,7 +59,6 @@ static void		get_points(t_winfo *w, int *fd, char *line)
 				ft_putendl_fd("Not a valid file", 2);
 				exit(EXIT_FAILURE);
 			}
-
 			w->map[y][x] = val;
 			x++;
 		}

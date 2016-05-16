@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 
-int			init_all(t_winfo *w)
+int		init_all(t_winfo *w)
 {
 	if (init_sdl() < 0)
 		return (EXIT_ERROR);
@@ -30,20 +30,21 @@ int			init_all(t_winfo *w)
 	return (0);
 }
 
-void		clear_screen(t_winfo *w)
+void	clear_screen(t_winfo *w)
 {
 	SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
 	SDL_RenderClear(w->renderer);
 }
 
-static void	destroy_tab(int **tab, size_t len)
+void	destroy_tab(int **tab, size_t len)
 {
-	size_t i;
+	int	i;
 
 	i = 0;
-	while (i < len)
+	while (len--)
 	{
 		free(tab[i]);
+		tab[i] = NULL;
 		i++;
 	}
 	free(tab);
@@ -56,6 +57,7 @@ void	quit(t_winfo *w)
 	SDL_DestroyRenderer(w->renderer);
 	SDL_DestroyWindow(w->window);
 	Mix_FreeChunk(w->step);
+	Mix_FreeChunk(w->winning);
 	Mix_FreeMusic(w->music);
 	destroy_tab(w->map, w->total_col);
 	//free(w);

@@ -18,6 +18,15 @@ void	move_forward(t_map_info *mi, t_time_info *ti, t_winfo *w)
 		mi->pos_x += mi->dir_x * C_SPEED;
 	if (w->map[(int)mi->pos_x][(int)(mi->pos_y + mi->dir_y * ti->move_speed)] == 0)
 		mi->pos_y += mi->dir_y * C_SPEED;
+	//printf("pos x: %d pos y: %d gate: %d\n", (int)mi->pos_x, (int)mi->pos_y,w->map[1][7] = 0 );
+	if ((int)mi->pos_x == 5 &&  (int)mi->pos_y == 1 &&
+			!ft_strcmp(w->map_name, "space.w3d") &&
+			!w->did_win)
+	{
+		w->did_win = 1;
+		w->map[1][8] = 0;
+		Mix_PlayChannel(-1, w->winning, 0);
+	}
 }
 
 void	move_backward(t_map_info *mi, t_time_info *ti, t_winfo *w)
@@ -27,6 +36,15 @@ void	move_backward(t_map_info *mi, t_time_info *ti, t_winfo *w)
 		mi->pos_x -= mi->dir_x * C_SPEED;
 	if (w->map[(int)mi->pos_x][(int)(mi->pos_y - mi->dir_y * ti->move_speed)] == 0)
 		mi->pos_y -= mi->dir_y * C_SPEED;
+	//printf("pos x: %d pos y: %d gate: %d\n", (int)mi->pos_x, (int)mi->pos_y,w->map[1][7] = 0 );
+	if ((int)mi->pos_x == 5 &&  (int)mi->pos_y == 1 &&
+			!ft_strcmp(w->map_name, "space.w3d") &&
+			!w->did_win)
+	{
+		w->did_win = 1;
+		w->map[1][8] = 0;
+		Mix_PlayChannel(-1, w->winning, 0);
+	}
 }
 
 void	turn_right(t_map_info *mi)

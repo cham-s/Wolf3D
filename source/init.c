@@ -26,6 +26,12 @@ int		load_audio(t_winfo *w)
 		ft_putendl_fd("Failed to load step sound effect", 2);
 		exit(EXIT_FAILURE);
 	}
+	w->winning = Mix_LoadWAV("media/sound/winning.wav");
+	if (!w->music)
+	{
+		ft_putendl_fd("Failed to load step sound effect", 2);
+		exit(EXIT_FAILURE);
+	}
 	return (0);
 }
 
@@ -76,12 +82,12 @@ void	init_window_info(t_winfo *w, int pos_x,
 	w->show_menu = 1;
 	w->running = 1;
 	w->first = 1;
+	w->did_win = 0;
 }
 
 int		create_window(t_winfo *w, char *title, int flags)
 {
-	w->title = title;
-	w->window = SDL_CreateWindow(w->title, w->pos.x, w->pos.y,
+	w->window = SDL_CreateWindow(title, w->pos.x, w->pos.y,
 								w->size.x, w->size.y, flags);
 	if (w->window == NULL)
 	{

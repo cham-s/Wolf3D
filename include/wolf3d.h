@@ -49,15 +49,17 @@ typedef struct	s_winfo
 	SDL_Renderer	*renderer;
 	SDL_Point		pos;
 	SDL_Point		size;
-	char			*title;
 	t_color			clear_c;
 	int				**map;
 	int				total_col;
 	int				total_li;
 	Mix_Music		*music;	
 	Mix_Chunk		*step;
+	Mix_Chunk		*winning;
 	SDL_Texture		*menu_start;
 	SDL_Texture		*menu_exit;
+	char			*map_name;
+	int				did_win;
 	int				menu;
 	int				index;
 	int				show_menu;
@@ -149,5 +151,6 @@ void		check_len_map(int x_len, t_winfo *w);
 void		check_error(int *fd, char *line, int x, int y);
 void		render_menu(t_winfo *w);
 SDL_Texture	*load_texture(t_winfo *w, char *name);
+void		destroy_tab(int **tab, size_t len);
 
 #endif
