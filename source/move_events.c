@@ -14,10 +14,6 @@
 
 void	move_forward(t_map_info *mi, t_time_info *ti, t_winfo *w)
 {
-	int static i = 0;
-
-	if (!(i++ % 14))
-		Mix_PlayChannel(-1, w->step, 0);
 	if (w->map[(int)(mi->pos_x + mi->dir_x * ti->move_speed)][(int)mi->pos_y] == 0)
 		mi->pos_x += mi->dir_x * C_SPEED;
 	if (w->map[(int)mi->pos_x][(int)(mi->pos_y + mi->dir_y * ti->move_speed)] == 0)

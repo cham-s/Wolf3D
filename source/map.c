@@ -82,6 +82,8 @@ void	draw(t_winfo *w)
 							Mix_PauseMusic();
 					}
 				}
+				else if (event.key.keysym.sym == SDLK_r)
+					init_map_info(&mi, w);
 			}
 		}
 		draw_map(w, &mi, &ri);

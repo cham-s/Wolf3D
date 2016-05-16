@@ -71,6 +71,7 @@ void	init_window_info(t_winfo *w, int pos_x,
 	w->clear_c.g = 0;
 	w->clear_c.b = 0;
 	w->clear_c.a = 255;
+	w->menu = 1;
 }
 
 int		create_window(t_winfo *w, char *title, int flags)
@@ -98,4 +99,28 @@ int		create_renderer(t_winfo *w, int index, int flags)
 	}
 	SDL_RenderSetLogicalSize(w->renderer, w->size.x, w->size.y);
 	return (0);
+}
+
+int		load_texture(t_winfo *w)
+{
+	w->m_start = SDL_LoadBMP("media/img/start.bmp");
+	w->m_exit = SDL_LoadBMP("media/img/exit.bmp");
+	if (!w->m_start || !w->m_exit)
+	{
+		ft_putendl_fd("Failed to load textures: ", 2);
+	}
+	w->menu_start = SDL_CreateTextureFromSurface(w->renderer, );
+}
+
+void	render_start(t_winfo *w)
+{
+	SDL_Rect	start;
+
+	clear_render(w);
+	start.h = HEIGHT;
+	start.w = WIDTH;
+	start.x = 0;
+	start.y = 0;
+
+
 }

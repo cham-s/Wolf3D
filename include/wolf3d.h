@@ -57,6 +57,11 @@ typedef struct	s_winfo
 	int				total_li;
 	Mix_Music		*music;	
 	Mix_Chunk		*step;
+	SDL_Surface		*m_start;
+	SDL_Surface		*m_exit;
+	SDL_Texture		*menu_start;
+	SDL_Texture		*menu_exit;
+	int				menu;
 }					t_winfo;
 
 typedef	struct	s_map_info
