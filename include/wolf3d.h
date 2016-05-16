@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/16 16:05:10 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/16 17:31:25 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_winfo
 	int				index;
 	int				show_menu;
 	int				running;
+	int				first;
 }					t_winfo;
 
 typedef	struct	s_map_info

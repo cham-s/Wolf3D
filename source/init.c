@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:11:01 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/16 16:06:03 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/16 17:31:42 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	init_window_info(t_winfo *w, int pos_x,
 	w->index = 0;
 	w->show_menu = 1;
 	w->running = 1;
+	w->first = 1;
 }
 
 int		create_window(t_winfo *w, char *title, int flags)

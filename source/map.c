@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/16 17:03:23 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/16 17:34:09 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 		draw_ceiling_wall_floor(w, mi, ri);
 		mi->x++;
 	}
+	w->first = 0;
 	draw_mini_map(w, mi);
 	SDL_RenderPresent(w->renderer);
 }
 
-void	event_directions(t_winfo *w, t_time_info *ti, t_map_info *mi, SDL_Event *event)
+void	directions_key(t_winfo *w, t_time_info *ti, t_map_info *mi, SDL_Event *event)
 {
-	if (event->key.keysym.sym == SDLK_ESCAPE && !w->show_menu)
+	if (event->key.keysym.sym == SDLK_ESCAPE && w->first)
+		w->running = 0;
+	else if (event->key.keysym.sym == SDLK_ESCAPE && !w->show_menu)
 		w->show_menu = 1;
 	else if (event->key.keysym.sym == SDLK_ESCAPE && w->show_menu)
 	{
@@ -69,6 +72,19 @@ void	event_directions(t_winfo *w, t_time_info *ti, t_map_info *mi, SDL_Event *ev
 		turn_left(mi);
 }
 
+void	enter_key(t_winfo *w, SDL_Event *event)
+{
+	if (event->key.keysym.sym == SDLK_RETURN &&
+				w->index == 1 && w->show_menu)
+		w->running = 0;
+	else if (event->key.keysym.sym == SDLK_RETURN &&
+				w->index == 0 && w->show_menu)
+	{
+		w->index = 0;
+		w->show_menu = 0;
+	}
+}
+
 void	toggle_music(t_winfo *w)
 {
 	if (Mix_PlayingMusic() == 0)
@@ -82,6 +98,14 @@ void	toggle_music(t_winfo *w)
 	}
 }
 
+void	reg_key(t_winfo *w, t_map_info *mi, SDL_Event *event)
+{
+	if (event->key.keysym.sym == SDLK_p && !w->show_menu)
+		toggle_music(w);
+	else if (event->key.keysym.sym == SDLK_r)
+		init_map_info(mi, w);
+}
+
 void	draw(t_winfo *w)
 {
 	//malloc instead?
@@ -90,7 +114,6 @@ void	draw(t_winfo *w)
 	t_time_info	ti;
 	SDL_Event	event;
 
-	(void)ri;
 	init_map_info(&mi, w);
 	ti.time = 0;
 	ti.oldtime = 0;
@@ -103,19 +126,9 @@ void	draw(t_winfo *w)
 				w->running = 0;
 			else if (event.key.type == SDL_KEYDOWN)
 			{
-				event_directions(w, &ti, &mi, &event);
-				if (event.key.keysym.sym == SDLK_p && !w->show_menu)
-					toggle_music(w);
-				else if (event.key.keysym.sym == SDLK_r)
-					init_map_info(&mi, w);
-				else if (event.key.keysym.sym == SDLK_RCTRL && w->index == 1 && w->show_menu)
-					w->running = 0;
-				else if (event.key.keysym.sym == SDLK_RCTRL && w->index == 0 && w->show_menu)
-				{
-					w->index = 0;
-					w->show_menu = 0;
-				}
-
+				directions_key(w, &ti, &mi, &event);
+				reg_key(w, &mi, &event);
+				enter_key(w, &event);
 			}
 		}
 		if (w->show_menu)
