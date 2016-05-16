@@ -16,6 +16,8 @@
 #*.a
 #*.la
 #*.lo
+#
+.DS_Store
 
 # Executables
 *.exe

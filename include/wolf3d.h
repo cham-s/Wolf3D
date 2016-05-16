@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 16:21:47 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/16 16:05:10 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_winfo
 	SDL_Texture		*menu_exit;
 	int				menu;
 	int				index;
+	int				show_menu;
+	int				running;
 }					t_winfo;
 
 typedef	struct	s_map_info
