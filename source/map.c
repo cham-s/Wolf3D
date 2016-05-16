@@ -14,7 +14,7 @@
 
 static void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 {
-	clear_screen(w, &w->clear_c);
+	clear_screen(w);
 	mi->x = 0;
 	while (mi->x < WIDTH)
 	{
@@ -36,6 +36,8 @@ static void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 		draw_ceiling_wall_floor(w, mi, ri);
 		mi->x++;
 	}
+	draw_mini_map(w, mi);
+	SDL_RenderPresent(w->renderer);
 }
 
 void	draw(t_winfo *w)
@@ -87,7 +89,5 @@ void	draw(t_winfo *w)
 			}
 		}
 		draw_map(w, &mi, &ri);
-		draw_mini_map(w, &mi);
-		SDL_RenderPresent(w->renderer);
 	}
 }

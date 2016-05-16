@@ -72,6 +72,7 @@ void	init_window_info(t_winfo *w, int pos_x,
 	w->clear_c.b = 0;
 	w->clear_c.a = 255;
 	w->menu = 1;
+	w->index = 0;
 }
 
 int		create_window(t_winfo *w, char *title, int flags)
@@ -101,26 +102,35 @@ int		create_renderer(t_winfo *w, int index, int flags)
 	return (0);
 }
 
-int		load_texture(t_winfo *w)
+SDL_Texture	*load_texture(t_winfo *w, char *name)
 {
-	w->m_start = SDL_LoadBMP("media/img/start.bmp");
-	w->m_exit = SDL_LoadBMP("media/img/exit.bmp");
-	if (!w->m_start || !w->m_exit)
+	SDL_Surface	*surface;
+	SDL_Texture	*texture;
+
+	surface = SDL_LoadBMP(name);
+	if (surface)
 	{
 		ft_putendl_fd("Failed to load textures: ", 2);
+		exit(EXIT_FAILURE);
 	}
-	w->menu_start = SDL_CreateTextureFromSurface(w->renderer, );
+	texture = SDL_CreateTextureFromSurface(w->renderer, surface);
+	SDL_FreeSurface(surface);
+	return (texture);
 }
 
-void	render_start(t_winfo *w)
+void	render_menu(t_winfo *w)
 {
-	SDL_Rect	start;
+	SDL_Rect	m;
 
-	clear_render(w);
-	start.h = HEIGHT;
-	start.w = WIDTH;
-	start.x = 0;
-	start.y = 0;
+	clear_screen(w);
+	m.h = HEIGHT;
+	m.w = WIDTH;
+	m.x = 0;
+	m.y = 0;
 
-
+	if (w->index == 0)
+		SDL_RenderCopy(w->renderer, w->menu_start, NULL, &m);
+	else
+		SDL_RenderCopy(w->renderer, w->menu_exit, NULL, &m);
+	SDL_RenderPresent(w->renderer);
 }

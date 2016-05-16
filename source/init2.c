@@ -14,12 +14,6 @@
 
 int			init_all(t_winfo *w)
 {
-	t_color		c;
-
-	c.r = 0;
-	c.g = 255;
-	c.r = 0;
-	c.r = 255;
 	if (init_sdl() < 0)
 		return (EXIT_ERROR);
 	else if (init_media() < 0)
@@ -30,13 +24,15 @@ int			init_all(t_winfo *w)
 	else if (create_renderer(w, FIRST_MATCH, SDL_RENDERER_SOFTWARE) < 0)
 		return (EXIT_ERROR);
 	load_audio(w);
-	clear_screen(w, &c);
+	w->menu_start = load_texture(w, "media/img/start.bmp");
+	w->menu_exit = load_texture(w, "media/img/exit.bmp");
+	clear_screen(w);
 	return (0);
 }
 
-void		clear_screen(t_winfo *w, t_color *c)
+void		clear_screen(t_winfo *w)
 {
-	SDL_SetRenderDrawColor(w->renderer, c->r, c->g, c->b, c->a);
+	SDL_SetRenderDrawColor(w->renderer, 0, 0, 0, 255);
 	SDL_RenderClear(w->renderer);
 }
 
@@ -55,6 +51,8 @@ static void	destroy_tab(int **tab, size_t len)
 
 void	quit(t_winfo *w)
 {
+	SDL_DestroyTexture(w->menu_start);
+	SDL_DestroyTexture(w->menu_exit);
 	SDL_DestroyRenderer(w->renderer);
 	SDL_DestroyWindow(w->window);
 	Mix_FreeChunk(w->step);
