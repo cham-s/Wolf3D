@@ -28,6 +28,7 @@ LIBGRPH 	:= -framework OpenGL
 INCLUDES 	:= -I include -I lib/libft/includes -I include/SDL2
 SDLDYLIB	:= $(LIBDIR)/$(SDLIBDIR)/libSDL2-2.0.0.dylib
 SDLIMG		:= $(LIBDIR)/$(SDLIBDIR)/SDL2_image
+SDLSND		:= $(LIBDIR)/$(SDLIBDIR)/SDL2_mixer
 SDL2		:= $(LIBDIR)/$(SDLIBDIR)/SDL2
 OBJS 		:=	$(OBJDIR)/main.o \
 				$(OBJDIR)/init.o \
@@ -50,13 +51,17 @@ all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
 	$(CC) $(FLAGS) $(LIB) $(LIBSDL) $(INCLUDES) $(OBJS)  -o $(NAME) $(LIBGRPH)\
-	   	$(SDLIMG)
+	   	$(SDLIMG) $(SDLSND)
 	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDLDYLIB)\
+	   	$(NAME)
+	@install_name_tool -change @rpath/SDL2_mixer.framework/Versions/A/SDL2_mixer $(SDLSND)\
 	   	$(NAME)
 	@install_name_tool -change @rpath/SDL2_image.framework/Versions/A/SDL2_image\
 	   	$(SDLIMG) $(NAME)
 	@install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 $(SDLDYLIB)\
 	   	$(SDLIMG)
+	@install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 $(SDLDYLIB)\
+	   	$(SDLSND)
 
 $(LIB):
 	make -C lib/libft/

@@ -22,11 +22,14 @@ int			init_all(t_winfo *w)
 	c.r = 255;
 	if (init_sdl() < 0)
 		return (EXIT_ERROR);
+	else if (init_media() < 0)
+		return (EXIT_ERROR);
 	init_window_info(w, 100, 200, WIDTH, HEIGHT);
 	if (create_window(w, "Wolf 3D", SDL_WINDOW_RESIZABLE) < 0)
 		return (EXIT_ERROR);
 	else if (create_renderer(w, FIRST_MATCH, SDL_RENDERER_SOFTWARE) < 0)
 		return (EXIT_ERROR);
+	load_audio(w);
 	clear_screen(w, &c);
 	return (0);
 }
@@ -54,7 +57,11 @@ void	quit(t_winfo *w)
 {
 	SDL_DestroyRenderer(w->renderer);
 	SDL_DestroyWindow(w->window);
+	Mix_FreeChunk(w->step);
+	Mix_FreeMusic(w->music);
 	destroy_tab(w->map, w->total_col);
 	//free(w);
 	SDL_Quit();
+	IMG_Quit();
+	Mix_Quit();
 }

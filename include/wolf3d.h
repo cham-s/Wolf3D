@@ -15,6 +15,7 @@
 # include <fcntl.h>
 # include "SDL2/SDL.h"
 # include "SDL2/SDL_image.h"
+# include "SDL2/SDL_mixer.h"
 # include "libft.h"
 
 # define NO_FLAG 0
@@ -54,6 +55,8 @@ typedef struct	s_winfo
 	int				**map;
 	int				total_col;
 	int				total_li;
+	Mix_Music		*music;	
+	Mix_Chunk		*step;
 }					t_winfo;
 
 typedef	struct	s_map_info
@@ -102,12 +105,14 @@ typedef struct	s_ray_info
 }				t_ray_info;
 
 int		init_all(t_winfo *w);
+void	init_window_info(t_winfo *w, int pos_x, int pos_y, int size_x, int size_y);
+int		init_sdl(void);
+int		init_media(void);
+int		load_audio(t_winfo *w);
 void	clear_screen(t_winfo *w, t_color *c);
 void	run_wolf(t_winfo *w);
 int		create_renderer(t_winfo *w, int index, int flags);
 int		create_window(t_winfo *w, char *title, int flags);
-void	init_window_info(t_winfo *w, int pos_x, int pos_y, int size_x, int size_y);
-int		init_sdl(void);
 void	quit(t_winfo *w);
 int		load_media(SDL_Surface *img, char *img_path);
 void	render(t_winfo *w, int y_pos);

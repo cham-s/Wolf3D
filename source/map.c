@@ -70,6 +70,18 @@ void	draw(t_winfo *w)
 					turn_right(&mi);
 				else if (event.key.keysym.sym == SDLK_LEFT)
 					turn_left(&mi);
+				else if (event.key.keysym.sym == SDLK_p)
+				{
+					if (Mix_PlayingMusic() == 0)
+						Mix_PlayMusic(w->music, -1);
+					else
+					{
+						if (Mix_PausedMusic() == 1)
+							Mix_ResumeMusic();
+						else
+							Mix_PauseMusic();
+					}
+				}
 			}
 		}
 		draw_map(w, &mi, &ri);
