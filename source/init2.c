@@ -24,8 +24,16 @@ int		init_all(t_winfo *w)
 	else if (create_renderer(w, FIRST_MATCH, SDL_RENDERER_SOFTWARE) < 0)
 		return (EXIT_ERROR);
 	load_audio(w);
-	w->menu_start = load_texture(w, "media/img/start.bmp");
-	w->menu_exit = load_texture(w, "media/img/exit.bmp");
+	if (!ft_strcmp(w->map_name, "space.w3d"))
+	{
+		w->menu_start = load_texture(w, "media/img/space_menu_start.bmp");
+		w->menu_exit = load_texture(w, "media/img/space_menu_exit.bmp");
+	}
+	else
+	{
+		w->menu_start = load_texture(w, "media/img/start.bmp");
+		w->menu_exit = load_texture(w, "media/img/exit.bmp");
+	}
 	clear_screen(w);
 	return (0);
 }

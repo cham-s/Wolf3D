@@ -14,12 +14,19 @@
 
 int		load_audio(t_winfo *w)
 {
-	w->music = Mix_LoadMUS("media/sound/rainforest.wav");
+	char	*music;
+
+	if (!ft_strcmp(w->map_name, "space.w3d"))
+		music = "media/sound/rainforest.wav";
+	else
+		music = "media/sound/night.wav";
+	w->music = Mix_LoadMUS(music);
 	if (!w->music)
 	{
 		ft_putendl_fd("Failed to load music ", 2);
 		exit(EXIT_FAILURE);
 	}
+	else
 	w->step = Mix_LoadWAV("media/sound/walk_s.wav");
 	if (!w->step)
 	{
