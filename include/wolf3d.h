@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/16 17:31:25 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/17 11:31:49 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 
 # define C_SPEED 0.0989
 # define PIX_SIZE 6
+
+#define TEX_H 64
+#define TEX_W 64
 
 typedef	struct	s_color
 {
