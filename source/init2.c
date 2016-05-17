@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:11:08 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/16 15:53:13 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/17 13:12:22 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,15 @@ void	quit(t_winfo *w)
 	SDL_DestroyTexture(w->menu_exit);
 	SDL_DestroyRenderer(w->renderer);
 	SDL_DestroyWindow(w->window);
+	Mix_FreeMusic(w->music);
 	Mix_FreeChunk(w->step);
 	Mix_FreeChunk(w->winning);
-	Mix_FreeMusic(w->music);
+	Mix_FreeChunk(w->start);
+	Mix_FreeChunk(w->move);
+	Mix_FreeChunk(w->escape);
 	destroy_tab(w->map, w->total_col);
 	//free(w);
-	SDL_Quit();
 	IMG_Quit();
 	Mix_Quit();
+	SDL_Quit();
 }

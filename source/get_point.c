@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:19:16 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 17:48:50 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/17 13:28:07 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static	void	init_points(char *file_name, t_winfo *w)
 		check_len_map(x_len, w);
 		free(line);
 	}
+	free(line);
 	check_error(&fd, line, x_len, i);
 	w->total_col = i;
 	close(fd);
@@ -67,6 +68,7 @@ static void		get_points(t_winfo *w, int *fd, char *line)
 		x = 0;
 		y++;
 	}
+	free(line);
 }
 
 void	get_map(char *file_name, t_winfo *w)

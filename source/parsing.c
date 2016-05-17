@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:06:17 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 19:11:22 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/17 13:25:30 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		check_error(int *fd, char *line, int x, int y)
 		ft_putendl_fd("Map too small", 2);
 		exit(EXIT_FAILURE);
 	}
+	free(line);
 }
 
 void		check_len_map(int x_len, t_winfo *w)
