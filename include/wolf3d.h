@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/17 11:31:49 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:32:33 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,7 @@ void		check_error(int *fd, char *line, int x, int y);
 void		render_menu(t_winfo *w);
 SDL_Texture	*load_texture(t_winfo *w, char *name);
 void		destroy_tab(int **tab, size_t len);
+
+int		draw_w(t_winfo *w, int x, int start, int end, Uint32 buffer[HEIGHT][WIDTH]);
 
 #endif

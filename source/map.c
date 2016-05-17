@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/17 13:22:10 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:39:03 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,33 @@
 
 void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 {
-	/* Uint32 texture[8][TEX_H * TEX_W]; */
-	/* int x; */
-	/* int y; */
-    /*  */
-	/* x = 0; */
-	/* y = 0; */
-	/* while (x < TEX_W) */
-	/* { */
-	/* 	while (y < TEX_H) */
-	/* 	{ */
-	/* 		int xorcolor = (x * 256 / TEX_W) ^ (y * 256 / TEX_H); */
-	/* 		int ycolor = y * 256 / TEX_H; */
-	/* 		int xycolor = y * 128 / TEX_H + x * 128 / TEX_W; */
-	/* 		texture[0][TEX_W * y + x] = 65536 * 254 * (x != y && x != TEX_W - y); */
-	/* 		texture[1][TEX_W * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; */
-	/* 		texture[2][TEX_W * y + x] = 256 * xycolor + 65536 * xycolor; */
-	/* 		texture[3][TEX_W * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; */
-	/* 		texture[4][TEX_W * y + x] = 256 * xorcolor; */
-	/* 		texture[5][TEX_W * y + x] = 65536 * 192 * (x % 16 && y % 16); */
-	/* 		texture[6][TEX_W * y + x] = 65536 * ycolor;; */
-	/* 		texture[7][TEX_W * y + x] = 128 + 256 * 128 + 65536 * 128; */
-	/* 		y++; */
-	/* 	} */
-	/* 	x++; */
-	/* 	y = 0; */
-	/* } */
+	Uint32	buffer[HEIGHT][WIDTH];
+	Uint32	texture[8][TEX_H * TEX_W];
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (x < TEX_W)
+	{
+		while (y < TEX_H)
+		{
+			int xorcolor = (x * 256 / TEX_W) ^ (y * 256 / TEX_H);
+			int ycolor = y * 256 / TEX_H;
+			int xycolor = y * 128 / TEX_H + x * 128 / TEX_W;
+			texture[0][TEX_W * y + x] = 65536 * 254 * (x != y && x != TEX_W - y);
+			texture[1][TEX_W * y + x] = xycolor + 256 * xycolor + 65536 * xycolor;
+			texture[2][TEX_W * y + x] = 256 * xycolor + 65536 * xycolor;
+			texture[3][TEX_W * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor;
+			texture[4][TEX_W * y + x] = 256 * xorcolor;
+			texture[5][TEX_W * y + x] = 65536 * 192 * (x % 16 && y % 16);
+			texture[6][TEX_W * y + x] = 65536 * ycolor;;
+			texture[7][TEX_W * y + x] = 128 + 256 * 128 + 65536 * 128;
+			y++;
+		}
+		x++;
+		y = 0;
+	}
 	clear_screen(w);
 	mi->x = 0;
 	while (mi->x < WIDTH)
@@ -59,30 +60,36 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 		mi->draw_end = mi->line_height / 2 + HEIGHT / 2;
 		if (mi->draw_end >= HEIGHT)
 			mi->draw_end = HEIGHT - 1;
-		draw_ceiling_wall_floor(w, mi, ri);
-		/* int		tex_num;  */
-		/* double	wall_x; */
-		/* int		tex_x; */
-		/* tex_num = w->map[mi->map_x][mi->map_y] - 1;  */
-		/* // calculate value of wall x */
-		/* if (side == 0) */
-		/* 	wall_x = ri->ray_pos_y + mi->perp_wall_dist * ri->ray_dir_y; */
-		/* else */
-		/* 	wall_x = ri->ray_pos_x + mi->perp_wall_dist * ri->ray_dir_x; */
-		/* wall_x -= floor(wall_x); */
-		/* // x coordinate on the texture */
-		/* tex_x = (int)(wall_x * (double)TEX_W); */
-		/* if (side == 0 && ri->ray_dir_x > 0) */
-		/* 	tex_x = TEX_W - tex_x - 1; */
-		/* if (side == 1 && ri->ray_dir_y < 0) */
-		/* 	tex_x = TEX_W - tex_x - 1; */
-		/* int y = mi->draw_start; */
-		/* while (y < mi->draw_end) */
-		/* { */
-		/* 	int d = y * 256 - HEIGHT * 128 + mi->line_height * 128; */
-		/* 	int tex_y = ((d * TEX_H) / mi); */
-		/* 	y++; */
-		/* } */
+		//draw_ceiling_wall_floor(w, mi, ri);
+		int		tex_num; 
+		double	wall_x;
+		int		tex_x;
+		tex_num = w->map[mi->map_x][mi->map_y] - 1; 
+		// calculate value of wall x
+		if (mi->side == 0)
+			wall_x = ri->ray_pos_y + mi->perp_wall_dist * ri->ray_dir_y;
+		else
+			wall_x = ri->ray_pos_x + mi->perp_wall_dist * ri->ray_dir_x;
+		wall_x -= floor(wall_x);
+		// x coordinate on the texture
+		tex_x = (int)(wall_x * (double)TEX_W);
+		if (mi->side == 0 && ri->ray_dir_x > 0)
+			tex_x = TEX_W - tex_x - 1;
+		if (mi->side == 1 && ri->ray_dir_y < 0)
+			tex_x = TEX_W - tex_x - 1;
+		int y = mi->draw_start;
+		while (y < mi->draw_end)
+		{
+			int		d = y * 256 - HEIGHT * 128 + mi->line_height * 128;
+			int		tex_y = ((d * TEX_H) / mi->line_height) / 256;
+			Uint32	color = texture[tex_num][TEX_H * tex_y + tex_x];
+			// make color darker
+			if (mi->side == 1)
+				color = (color >> 1) & 8355711;
+			buffer[y][x] = color;
+			y++;
+		}
+		draw_w(w, x, mi->draw_start, mi->draw_end, buffer);
 		mi->x++;
 	}
 	w->first = 0;

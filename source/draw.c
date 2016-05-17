@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:10:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 18:46:13 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/17 15:47:14 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,26 @@ int		draw_wall(t_winfo *w, int x, int start, int end, t_color *c)
 	SDL_SetRenderDrawColor(w->renderer, c->r, c->g, c->b, c->a);
 	while (start < end)
 	{
+		SDL_RenderDrawPoint(w->renderer, x, start);
+		start++;
+	}
+	return (1);
+}
+
+int		draw_w(t_winfo *w, int x, int start, int end, Uint32 buffer[HEIGHT][WIDTH])
+{
+	Uint8		r;
+	Uint8		g;
+	Uint8		b;
+
+	while (start < end)
+	{
+		r = (buffer[start][x] & 0xFF0000) >> 16;
+		g = (buffer[start][x] & 0xFF00) >> 8;
+		b = (buffer[start][x] & 0xFF);
+		//
+		printf("x : %d y: %d color :%d\n", x, start, buffer[start][x]);
+		SDL_SetRenderDrawColor(w->renderer, r, g, b, 255);
 		SDL_RenderDrawPoint(w->renderer, x, start);
 		start++;
 	}
