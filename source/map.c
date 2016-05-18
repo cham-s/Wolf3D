@@ -42,10 +42,14 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 		calculate_ray_pos(ri, mi);
 		perform_dda(mi, w);
 		side_and_draw_start(mi, ri);
-		//draw_ceiling_wall_floor(w, mi, ri);
-		get_coord_text(w, mi, ri);
-		extract_color_from_text(mi, buffer, texture);
-		draw_white_black(w, mi, buffer);
+		if (ft_strcmp(w->map_name, "space.w3d"))
+			draw_ceiling_wall_floor(w, mi, ri);
+		else
+		{
+			get_coord_text(w, mi, ri);
+			extract_color_from_text(mi, buffer, texture);
+			draw_white_black(w, mi, buffer);
+		}
 		mi->x++;
 	}
 	w->first = 0;

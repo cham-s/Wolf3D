@@ -36,7 +36,7 @@ int		draw_wall(t_winfo *w, int x, int start, int end, t_color *c)
 }
 
 int		draw_w(t_winfo *w, int x, int start, int end,
-				Uint32 buffer[HEIGHT][WIDTH])
+		Uint32 buffer[HEIGHT][WIDTH])
 {
 	Uint8		r;
 	Uint8		g;
@@ -59,19 +59,22 @@ void	draw_ceiling_wall_floor(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 	int y;
 
 	y = 0;
-	lightblue(&mi->wall_color);
+	mi->wall_color.r = 29;
+	mi->wall_color.g = 179;
+	mi->wall_color.b = 203;
+	mi->wall_color.a = 255;
 	draw_wall(w, mi->x, y, mi->draw_start, &mi->wall_color);
 	face_color(mi, ri);
 	draw_wall(w, mi->x, mi->draw_start, mi->draw_end, &mi->wall_color);
-	if (ft_strcmp(w->map_name, "space.w3d"))
-		brown(&mi->wall_color);
-	else
-		grey(&mi->wall_color);
+	mi->wall_color.r = 55;
+	mi->wall_color.g = 42;
+	mi->wall_color.b = 27;
+	mi->wall_color.a = 255;
 	draw_wall(w, mi->x, mi->draw_end, HEIGHT, &mi->wall_color);
 }
 
 void	draw_white_black(t_winfo *w, t_map_info *mi,
-						Uint32 buffer[HEIGHT][WIDTH])
+		Uint32 buffer[HEIGHT][WIDTH])
 {
 	int y;
 
