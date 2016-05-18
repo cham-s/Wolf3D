@@ -19,7 +19,7 @@ int		load_audio(t_winfo *w)
 	if (!ft_strcmp(w->map_name, "space.w3d"))
 		music = "media/sound/rainforest.wav";
 	else
-		music = "media/sound/night.wav";
+		music = "media/sound/rainforest.wav";
 	w->music = Mix_LoadMUS(music);
 	if (!w->music)
 	{

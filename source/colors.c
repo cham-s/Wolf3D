@@ -36,18 +36,18 @@ void	orange(t_color *c)
 	c->a = 255;
 }
 
+void	brown(t_color *c)
+{
+	c->r = 55;
+	c->r = 42;
+	c->r = 27;
+	c->a = 255;
+}
+
 void	red(t_color *c)
 {
 	c->r = 234;
 	c->r = 67;
 	c->r = 54;
-	c->a = 255;
-}
-
-void	violet(t_color *c)
-{
-	c->r = 34;
-	c->r = 18;
-	c->r = 63;
 	c->a = 255;
 }

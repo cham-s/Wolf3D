@@ -32,7 +32,6 @@ static void	face_color2(t_map_info *mi, t_ray_info *ri)
 	}
 }
 
-
 void		face_color(t_map_info *mi, t_ray_info *ri)
 {
 	if (mi->side == 0 && ri->ray_dir_x > 0)
@@ -52,4 +51,28 @@ void		face_color(t_map_info *mi, t_ray_info *ri)
 	}
 	else
 		face_color2(mi, ri);
+}
+
+void	violet(t_color *c)
+{
+	c->r = 34;
+	c->r = 18;
+	c->r = 63;
+	c->a = 255;
+}
+
+void	grey(t_color *c)
+{
+	c->r = 186;
+	c->r = 186;
+	c->r = 186;
+	c->a = 255;
+}
+
+void	lightblue(t_color *c)
+{
+	c->r = 29;
+	c->r = 179;
+	c->r = 203;
+	c->a = 0;
 }

@@ -118,6 +118,17 @@ typedef struct	s_ray_info
 	double	width;
 }				t_ray_info;
 
+typedef struct	s_wall
+{
+	SDL_Rect	wall;
+	int			end_h;
+	int			end_w;
+	int			x;
+	int			y;
+	int			i;
+	int			j;
+}				t_wall;
+
 int			init_all(t_winfo *w);
 void		init_window_info(t_winfo *w, int pos_x, int pos_y, int size_x, int size_y);
 int			init_sdl(void);
@@ -143,6 +154,9 @@ void		red(t_color *c);
 void		orange(t_color *c);
 void		green(t_color *c);
 void		blue(t_color *c);
+void		grey(t_color *c);
+void		brown(t_color *c);
+void		lightblue(t_color *c);
 void		perform_dda(t_map_info *mi, t_winfo *w);
 void		calculate_ray_pos(t_ray_info *ri, t_map_info *mi);
 void		calculate_step(t_ray_info *ri, t_map_info *mi);
