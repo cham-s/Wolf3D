@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 21:10:30 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 21:22:07 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef	struct		s_map_info
 	int				line_height;
 	int				draw_start;
 	int				draw_end;
-	int				tex_num; 
+	int				tex_num;
 	double			wall_x;
 	int				tex_x;
 	t_color			wall_color;
@@ -182,7 +182,8 @@ void				enter_key(t_winfo *w, SDL_Event *event);
 void				directions_key(t_winfo *w, t_time_info *ti,
 								t_map_info *mi, SDL_Event *event);
 void				other_keys(t_winfo *w, SDL_Event *event);
-void				extract_color_from_text(t_map_info *mi, Uint32 buffer[HEIGHT][WIDTH],
+void				extract_color_from_text(t_map_info *mi,
+					Uint32 buffer[HEIGHT][WIDTH],
 					Uint32 texture[8][TEX_H * TEX_W]);
 void				get_coord_text(t_winfo *w, t_map_info *mi, t_ray_info *ri);
 void				generate_texture(Uint32	texture[8][TEX_H * TEX_W]);

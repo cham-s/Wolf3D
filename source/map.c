@@ -6,13 +6,13 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 21:07:17 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 21:27:50 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	side_and_draw_start(t_map_info * mi, t_ray_info *ri)
+void	side_and_draw_start(t_map_info *mi, t_ray_info *ri)
 {
 	if (mi->side == 0)
 		mi->perp_wall_dist = (mi->map_x - ri->ray_pos_x +
@@ -55,14 +55,11 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 
 void	draw(t_winfo *w)
 {
-	//malloc instead?
 	t_ray_info	ri;
 	t_map_info	mi;
 	t_time_info	ti;
 	SDL_Event	event;
 
-	//
-	(void)ri;
 	init_map_info(&mi, w);
 	ti.time = 0;
 	ti.oldtime = 0;
