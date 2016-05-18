@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:11:01 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/17 13:11:15 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:22:40 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		load_audio(t_winfo *w)
 		exit(EXIT_FAILURE);
 	}
 	else
-	w->step = Mix_LoadWAV("media/sound/walk_s.wav");
+		w->step = Mix_LoadWAV("media/sound/walk_s.wav");
 	if (!w->step)
 	{
 		ft_putendl_fd("Failed to load step sound effect", 2);

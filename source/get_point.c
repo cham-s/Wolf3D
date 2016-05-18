@@ -6,13 +6,13 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:19:16 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/17 13:28:07 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:19:40 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static	void	init_points(char *file_name, t_winfo *w)
+static void		init_points(char *file_name, t_winfo *w)
 {
 	char	*line;
 	int		i;
@@ -38,7 +38,7 @@ static	void	init_points(char *file_name, t_winfo *w)
 	close(fd);
 }
 
-void check_zero_on_border(t_winfo *w, int x, int y, int val)
+void			check_zero_on_border(t_winfo *w, int x, int y, int val)
 {
 	if (!val && (x == 0 || y == 0 || y == w->total_col - 1 ||
 				x == w->total_li - 1))
@@ -57,7 +57,7 @@ static void		get_points(t_winfo *w, int *fd, char *line)
 
 	x = 0;
 	y = 0;
-	w->map = (int **)malloc(sizeof(int *) * w->total_col); 
+	w->map = (int **)malloc(sizeof(int *) * w->total_col);
 	while (get_next_line(*fd, &line) > 0)
 	{
 		split = ft_strsplitspc(line);
@@ -77,7 +77,7 @@ static void		get_points(t_winfo *w, int *fd, char *line)
 	free(line);
 }
 
-void	get_map(char *file_name, t_winfo *w)
+void			get_map(char *file_name, t_winfo *w)
 {
 	int		fd;
 	char	*line;

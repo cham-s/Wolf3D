@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 16:41:03 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:35:54 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,7 @@ typedef struct		s_wall
 }					t_wall;
 
 int					init_all(t_winfo *w);
-void				init_window_info(t_winfo *w, int pos_x, int pos_y,
-					int size_x, int size_y);
+void				init_window_info(t_winfo *w, int pos_x, int pos_y);
 int					init_sdl(void);
 int					init_media(void);
 int					load_audio(t_winfo *w);

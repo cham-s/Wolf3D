@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 17:04:25 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 17:09:27 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:17:06 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int		draw_wall(t_winfo *w, int x, int start, int end, t_color *c)
 		end = start - end;
 		start -= end;
 	}
-	if (end < 0 || start >= HEIGHT  || x < 0 || x >= WIDTH)
-		return 0;
-	if (start < 0) 
+	if (end < 0 || start >= HEIGHT || x < 0 || x >= WIDTH)
+		return (0);
+	if (start < 0)
 		start = 0;
 	if (end >= WIDTH)
 		end = WIDTH - 1;
@@ -33,32 +33,6 @@ int		draw_wall(t_winfo *w, int x, int start, int end, t_color *c)
 		start++;
 	}
 	return (1);
-}
-
-void	get_rand_color(t_color *c)
-{
-	int	rand_n = rand() % 10 + 1;
-	if ( rand_n == 4 || rand_n == 13)
-	{
-		c->r = 227;
-		c->g = 255;
-		c->b = 255;
-		c->a = 255;
-	}
-	if (rand_n == 7 || rand_n == 2)
-	{
-		c->r = 0;
-		c->g = 3;
-		c->b = 158;
-		c->a = 255;
-	}
-	else
-	{
-		c->r = 0;
-		c->g = 0;
-		c->b = 0;
-		c->a = 255;
-	}
 }
 
 int		draw_w(t_winfo *w, int x, int start, int end,
@@ -82,8 +56,9 @@ int		draw_w(t_winfo *w, int x, int start, int end,
 
 void	draw_ceiling_wall_floor(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 {
-	int y = 0;
+	int y;
 
+	y = 0;
 	lightblue(&mi->wall_color);
 	draw_wall(w, mi->x, y, mi->draw_start, &mi->wall_color);
 	face_color(mi, ri);
@@ -98,8 +73,9 @@ void	draw_ceiling_wall_floor(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 void	draw_white_black(t_winfo *w, t_map_info *mi,
 						Uint32 buffer[HEIGHT][WIDTH])
 {
-	int y = 0;
+	int y;
 
+	y = 0;
 	mi->wall_color.r = 0;
 	mi->wall_color.g = 0;
 	mi->wall_color.b = 0;
@@ -111,4 +87,20 @@ void	draw_white_black(t_winfo *w, t_map_info *mi,
 	mi->wall_color.b = 67;
 	mi->wall_color.a = 255;
 	draw_wall(w, mi->x, mi->draw_end, HEIGHT, &mi->wall_color);
+}
+
+void	render_menu(t_winfo *w)
+{
+	SDL_Rect	m;
+
+	clear_screen(w);
+	m.h = HEIGHT;
+	m.w = WIDTH;
+	m.x = 0;
+	m.y = 0;
+	if (w->index == 0)
+		SDL_RenderCopy(w->renderer, w->menu_start, NULL, &m);
+	else
+		SDL_RenderCopy(w->renderer, w->menu_exit, NULL, &m);
+	SDL_RenderPresent(w->renderer);
 }

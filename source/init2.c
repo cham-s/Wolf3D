@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:11:08 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/17 13:12:22 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:38:11 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		init_all(t_winfo *w)
 		return (EXIT_ERROR);
 	else if (init_media() < 0)
 		return (EXIT_ERROR);
-	init_window_info(w, 100, 200, WIDTH, HEIGHT);
+	init_window_info(w, 100, 200);
 	if (create_window(w, "Wolf 3D", SDL_WINDOW_RESIZABLE) < 0)
 		return (EXIT_ERROR);
 	else if (create_renderer(w, FIRST_MATCH, SDL_RENDERER_SOFTWARE) < 0)
@@ -71,7 +71,6 @@ void	quit(t_winfo *w)
 	Mix_FreeChunk(w->move);
 	Mix_FreeChunk(w->escape);
 	destroy_tab(w->map, w->total_col);
-	//free(w);
 	IMG_Quit();
 	Mix_Quit();
 	SDL_Quit();

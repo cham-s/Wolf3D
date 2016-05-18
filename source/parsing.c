@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:06:17 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/17 13:25:30 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:44:31 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	check_map(char *map)
 
 int			check_args(int ac, char *map)
 {
-	char *	ext;
+	char *ext;
 
 	if (ac != 2)
 	{

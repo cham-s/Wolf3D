@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:10:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 17:08:31 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 17:11:44 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,4 @@ void	draw_mini_map(t_winfo *w, t_map_info *mi)
 	SDL_RenderDrawRect(w->renderer, &mini_map);
 	draw_cube(w);
 	draw_player(w, mi);
-}
-
-void	render_menu(t_winfo *w)
-{
-	SDL_Rect	m;
-
-	clear_screen(w);
-	m.h = HEIGHT;
-	m.w = WIDTH;
-	m.x = 0;
-	m.y = 0;
-	if (w->index == 0)
-		SDL_RenderCopy(w->renderer, w->menu_start, NULL, &m);
-	else
-		SDL_RenderCopy(w->renderer, w->menu_exit, NULL, &m);
-	SDL_RenderPresent(w->renderer);
 }
