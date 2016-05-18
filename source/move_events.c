@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:34 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 17:43:13 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 21:06:01 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,11 @@ void	turn_left(t_map_info *mi)
 	mi->dir_y = old_dir_x * sin(C_SPEED) + mi->dir_y * cos(C_SPEED);
 	mi->plane_x = mi->plane_x * cos(C_SPEED) - mi->plane_y * sin(C_SPEED);
 	mi->plane_y = old_plane_x * sin(C_SPEED) + mi->plane_y * cos(C_SPEED);
+}
+
+void	keydown(t_winfo *w, t_map_info *mi, t_time_info *ti, SDL_Event *event)
+{
+	directions_key(w, ti, mi, event);
+	reg_key(w, mi, event);
+	enter_key(w, event);
 }

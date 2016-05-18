@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 20:08:17 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 21:10:30 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,4 +175,16 @@ int					draw_w(t_winfo *w, int x, int start, int end,
 					Uint32 buffer[HEIGHT][WIDTH]);
 void				draw_white_black(t_winfo *w, t_map_info *mi,
 						Uint32 buffer[HEIGHT][WIDTH]);
+void				keydown(t_winfo *w, t_map_info *mi, t_time_info *ti,
+					SDL_Event *event);
+void				toggle_music(t_winfo *w);
+void				enter_key(t_winfo *w, SDL_Event *event);
+void				directions_key(t_winfo *w, t_time_info *ti,
+								t_map_info *mi, SDL_Event *event);
+void				other_keys(t_winfo *w, SDL_Event *event);
+void				extract_color_from_text(t_map_info *mi, Uint32 buffer[HEIGHT][WIDTH],
+					Uint32 texture[8][TEX_H * TEX_W]);
+void				get_coord_text(t_winfo *w, t_map_info *mi, t_ray_info *ri);
+void				generate_texture(Uint32	texture[8][TEX_H * TEX_W]);
+void				reg_key(t_winfo *w, t_map_info *mi, SDL_Event *event);
 #endif

@@ -6,7 +6,7 @@
 #    By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/15 13:08:29 by cattouma          #+#    #+#              #
-#    Updated: 2016/05/18 17:08:55 by cattouma         ###   ########.fr        #
+#    Updated: 2016/05/18 21:09:21 by cattouma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,10 @@ OBJS 		:=	$(OBJDIR)/main.o \
 				$(OBJDIR)/init.o \
 				$(OBJDIR)/init2.o \
 				$(OBJDIR)/map.o \
+				$(OBJDIR)/map2.o \
 				$(OBJDIR)/init_map.o \
 				$(OBJDIR)/move_events.o \
+				$(OBJDIR)/move_events2.o \
 				$(OBJDIR)/colors.o \
 				$(OBJDIR)/colors2.o \
 				$(OBJDIR)/draw.o \
