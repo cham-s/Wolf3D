@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 20:37:27 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 20:43:20 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,23 @@ void	extract_color_from_text(t_map_info *mi, Uint32 buffer[HEIGHT][WIDTH], Uint3
 	}
 }
 
+void	side_and_draw_start(t_map_info * mi, t_ray_info *ri)
+{
+	if (mi->side == 0)
+		mi->perp_wall_dist = (mi->map_x - ri->ray_pos_x +
+				(1 - mi->step_x) / 2) / ri->ray_dir_x;
+	else
+		mi->perp_wall_dist = (mi->map_y - ri->ray_pos_y +
+				(1 - mi->step_y) / 2) / ri->ray_dir_y;
+	mi->line_height = (int)(HEIGHT / mi->perp_wall_dist);
+	mi->draw_start = -mi->line_height / 2 + HEIGHT / 2;
+	if (mi->draw_start < 0)
+		mi->draw_start = 0;
+	mi->draw_end = mi->line_height / 2 + HEIGHT / 2;
+	if (mi->draw_end >= HEIGHT)
+		mi->draw_end = HEIGHT - 1;
+}
+
 void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 {
 	Uint32	buffer[HEIGHT][WIDTH];
@@ -91,24 +108,11 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 	{
 		calculate_ray_pos(ri, mi);
 		perform_dda(mi, w);
-		if (mi->side == 0)
-			mi->perp_wall_dist = (mi->map_x - ri->ray_pos_x +
-					(1 - mi->step_x) / 2) / ri->ray_dir_x;
-		else
-			mi->perp_wall_dist = (mi->map_y - ri->ray_pos_y +
-					(1 - mi->step_y) / 2) / ri->ray_dir_y;
-		mi->line_height = (int)(HEIGHT / mi->perp_wall_dist);
-		mi->draw_start = -mi->line_height / 2 + HEIGHT / 2;
-		if (mi->draw_start < 0)
-			mi->draw_start = 0;
-		mi->draw_end = mi->line_height / 2 + HEIGHT / 2;
-		if (mi->draw_end >= HEIGHT)
-			mi->draw_end = HEIGHT - 1;
+		side_and_draw_start(mi, ri);
 		//draw_ceiling_wall_floor(w, mi, ri);
 		get_coord_text(w, mi, ri);
 		extract_color_from_text(mi, buffer, texture);
 		draw_white_black(w, mi, buffer);
-		//draw_w(w, mi->x, mi->draw_start, mi->draw_end, buffer);
 		mi->x++;
 	}
 	w->first = 0;
@@ -204,37 +208,6 @@ void	keydown(t_winfo *w, t_map_info *mi, t_time_info *ti, SDL_Event *event)
 	reg_key(w, mi, event);
 	enter_key(w, event);
 }
-
-/* void	text(t_winfo * w) */
-/* { */
-/* 	int w = 0, h = 0; */
-/* 	Uint32 r, g, b, a; */
-
-/* 	if (SDL_BYTEORDER == SDL_BIG_ENDIAN) */ 
-/* 	{ */
-/* 		r = 0xff000000; */
-/* 		g = 0x00ff0000; */
-/* 		b = 0x0000ff00; */
-/* 		a = 0x000000ff; */
-/* 	} */
-/* 	else */
-/* 	{ */
-/* 		r = 0x000000ff; */
-/* 		g = 0x0000ff00; */
-/* 		b = 0x00ff0000; */
-/* 		a = 0xff000000; */
-/* 	} */
-
-/* 	SDL_Surface; */
-/* 	surface = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32, r, g, b, a); */
-/* 	//create map; */
-/* 	float map[WIDTH * HEIGHT + 2]; */
-/* 	ft_memset(map, 0, WIDTH * HEIGHY + 2); */
-
-/* 	map[]; */
-
-/* 	SDL_RenderPresent(w->renderer); */
-/* } */
 
 void	draw(t_winfo *w)
 {
