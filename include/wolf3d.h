@@ -46,6 +46,8 @@ typedef struct	s_player
 	SDL_Rect	pos;
 }				t_player;
 
+//
+#include <time.h>
 typedef struct	s_winfo
 {
 	SDL_Window		*window;
