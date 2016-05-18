@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 17:35:54 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 20:08:17 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ typedef	struct		s_map_info
 	int				line_height;
 	int				draw_start;
 	int				draw_end;
+	int				tex_num; 
+	double			wall_x;
+	int				tex_x;
 	t_color			wall_color;
 }					t_map_info;
 

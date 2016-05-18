@@ -6,16 +6,14 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 17:44:22 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 20:37:27 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
+void	generate_texture(Uint32	texture[8][TEX_H * TEX_W])
 {
-	Uint32	buffer[HEIGHT][WIDTH];
-	Uint32	texture[8][TEX_H * TEX_W];
 	int x;
 	int y;
 
@@ -41,6 +39,52 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 		x++;
 		y = 0;
 	}
+}
+
+void	get_coord_text(t_winfo *w, t_map_info *mi, t_ray_info *ri)
+{
+
+	mi->tex_num = w->map[mi->map_x][mi->map_y] - 1; 
+	// calculate value of wall x
+	if (mi->side == 0)
+		mi->wall_x = ri->ray_pos_y + mi->perp_wall_dist * ri->ray_dir_y;
+	else
+		mi->wall_x = ri->ray_pos_x + mi->perp_wall_dist * ri->ray_dir_x;
+	mi->wall_x -= floor(mi->wall_x);
+	// x coordinate on the texture
+	mi->tex_x = (int)(mi->wall_x * (double)TEX_W);
+	if (mi->side == 0 && ri->ray_dir_x > 0)
+		mi->tex_x = TEX_W - mi->tex_x - 1;
+	if (mi->side == 1 && ri->ray_dir_y < 0)
+		mi->tex_x = TEX_W - mi->tex_x - 1;
+}
+
+void	extract_color_from_text(t_map_info *mi, Uint32 buffer[HEIGHT][WIDTH], Uint32 texture[8][TEX_H * TEX_W])
+{
+	int		y;
+	int		d;
+	int		tex_y;
+	Uint32	color;
+
+	y = mi->draw_start;
+	while (y < mi->draw_end)
+	{
+		d = y * 256 - HEIGHT * 128 + mi->line_height * 128;
+		tex_y = ((d * TEX_H) / mi->line_height) / 256;
+		color = texture[mi->tex_num][TEX_H * tex_y + mi->tex_x];
+		if (mi->side == 1)
+			color = (color >> 1) & 8355711;
+		buffer[y][mi->x] = color;
+		y++;
+	}
+}
+
+void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
+{
+	Uint32	buffer[HEIGHT][WIDTH];
+	Uint32	texture[8][TEX_H * TEX_W];
+
+	generate_texture(texture);
 	clear_screen(w);
 	mi->x = 0;
 	while (mi->x < WIDTH)
@@ -61,35 +105,8 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 		if (mi->draw_end >= HEIGHT)
 			mi->draw_end = HEIGHT - 1;
 		//draw_ceiling_wall_floor(w, mi, ri);
-		int		tex_num; 
-		double	wall_x;
-		int		tex_x;
-		tex_num = w->map[mi->map_x][mi->map_y] - 1; 
-		// calculate value of wall x
-		if (mi->side == 0)
-			wall_x = ri->ray_pos_y + mi->perp_wall_dist * ri->ray_dir_y;
-		else
-			wall_x = ri->ray_pos_x + mi->perp_wall_dist * ri->ray_dir_x;
-		wall_x -= floor(wall_x);
-		// x coordinate on the texture
-		tex_x = (int)(wall_x * (double)TEX_W);
-		if (mi->side == 0 && ri->ray_dir_x > 0)
-			tex_x = TEX_W - tex_x - 1;
-		if (mi->side == 1 && ri->ray_dir_y < 0)
-			tex_x = TEX_W - tex_x - 1;
-		int y = mi->draw_start;
-
-		while (y < mi->draw_end)
-		{
-			int		d = y * 256 - HEIGHT * 128 + mi->line_height * 128;
-			int		tex_y = ((d * TEX_H) / mi->line_height) / 256;
-			Uint32	color = texture[tex_num][TEX_H * tex_y + tex_x];
-			// make color darker
-			if (mi->side == 1)
-				color = (color >> 1) & 8355711;
-			buffer[y][mi->x] = color;
-			y++;
-		}
+		get_coord_text(w, mi, ri);
+		extract_color_from_text(mi, buffer, texture);
 		draw_white_black(w, mi, buffer);
 		//draw_w(w, mi->x, mi->draw_start, mi->draw_end, buffer);
 		mi->x++;
