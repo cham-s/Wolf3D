@@ -1,0 +1,114 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/18 17:04:25 by cattouma          #+#    #+#             */
+/*   Updated: 2016/05/18 17:09:27 by cattouma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "wolf3d.h"
+
+int		draw_wall(t_winfo *w, int x, int start, int end, t_color *c)
+{
+	if (end < start)
+	{
+		start += end;
+		end = start - end;
+		start -= end;
+	}
+	if (end < 0 || start >= HEIGHT  || x < 0 || x >= WIDTH)
+		return 0;
+	if (start < 0) 
+		start = 0;
+	if (end >= WIDTH)
+		end = WIDTH - 1;
+	SDL_SetRenderDrawColor(w->renderer, c->r, c->g, c->b, c->a);
+	while (start < end)
+	{
+		SDL_RenderDrawPoint(w->renderer, x, start);
+		start++;
+	}
+	return (1);
+}
+
+void	get_rand_color(t_color *c)
+{
+	int	rand_n = rand() % 10 + 1;
+	if ( rand_n == 4 || rand_n == 13)
+	{
+		c->r = 227;
+		c->g = 255;
+		c->b = 255;
+		c->a = 255;
+	}
+	if (rand_n == 7 || rand_n == 2)
+	{
+		c->r = 0;
+		c->g = 3;
+		c->b = 158;
+		c->a = 255;
+	}
+	else
+	{
+		c->r = 0;
+		c->g = 0;
+		c->b = 0;
+		c->a = 255;
+	}
+}
+
+int		draw_w(t_winfo *w, int x, int start, int end,
+				Uint32 buffer[HEIGHT][WIDTH])
+{
+	Uint8		r;
+	Uint8		g;
+	Uint8		b;
+
+	while (start < end)
+	{
+		r = (buffer[start][x] & 0xFF0000) >> 16;
+		g = (buffer[start][x] & 0xFF00) >> 8;
+		b = (buffer[start][x] & 0xFF);
+		SDL_SetRenderDrawColor(w->renderer, r, g, b, 255);
+		SDL_RenderDrawPoint(w->renderer, x, start);
+		start++;
+	}
+	return (1);
+}
+
+void	draw_ceiling_wall_floor(t_winfo *w, t_map_info *mi, t_ray_info *ri)
+{
+	int y = 0;
+
+	lightblue(&mi->wall_color);
+	draw_wall(w, mi->x, y, mi->draw_start, &mi->wall_color);
+	face_color(mi, ri);
+	draw_wall(w, mi->x, mi->draw_start, mi->draw_end, &mi->wall_color);
+	if (ft_strcmp(w->map_name, "space.w3d"))
+		brown(&mi->wall_color);
+	else
+		grey(&mi->wall_color);
+	draw_wall(w, mi->x, mi->draw_end, HEIGHT, &mi->wall_color);
+}
+
+void	draw_white_black(t_winfo *w, t_map_info *mi,
+						Uint32 buffer[HEIGHT][WIDTH])
+{
+	int y = 0;
+
+	mi->wall_color.r = 0;
+	mi->wall_color.g = 0;
+	mi->wall_color.b = 0;
+	mi->wall_color.a = 255;
+	draw_wall(w, mi->x, y, mi->draw_start, &mi->wall_color);
+	draw_w(w, mi->x, mi->draw_start, mi->draw_end, buffer);
+	mi->wall_color.r = 67;
+	mi->wall_color.g = 67;
+	mi->wall_color.b = 67;
+	mi->wall_color.a = 255;
+	draw_wall(w, mi->x, mi->draw_end, HEIGHT, &mi->wall_color);
+}

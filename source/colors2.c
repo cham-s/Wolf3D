@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:08:14 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 13:08:16 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:59:42 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	face_color2(t_map_info *mi, t_ray_info *ri)
 {
-	// red side-left 
 	if (mi->side == 1 && ri->ray_dir_y > 0)
 	{
 		mi->wall_color.r = 189;
@@ -22,7 +21,6 @@ static void	face_color2(t_map_info *mi, t_ray_info *ri)
 		mi->wall_color.b = 37;
 		mi->wall_color.a = 255;
 	}
-	// white side-right
 	else
 	{
 		mi->wall_color.r = 244;
@@ -41,7 +39,6 @@ void		face_color(t_map_info *mi, t_ray_info *ri)
 		mi->wall_color.b = 139;
 		mi->wall_color.a = 255;
 	}
-	// own front
 	else if (mi->side == 0 && ri->ray_dir_x < 0)
 	{
 		mi->wall_color.r = 215;
@@ -53,7 +50,7 @@ void		face_color(t_map_info *mi, t_ray_info *ri)
 		face_color2(mi, ri);
 }
 
-void	violet(t_color *c)
+void		violet(t_color *c)
 {
 	c->r = 34;
 	c->r = 18;
@@ -61,7 +58,7 @@ void	violet(t_color *c)
 	c->a = 255;
 }
 
-void	grey(t_color *c)
+void		grey(t_color *c)
 {
 	c->r = 186;
 	c->r = 186;
@@ -69,7 +66,7 @@ void	grey(t_color *c)
 	c->a = 255;
 }
 
-void	lightblue(t_color *c)
+void		lightblue(t_color *c)
 {
 	c->r = 29;
 	c->r = 179;

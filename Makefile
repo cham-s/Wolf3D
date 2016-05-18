@@ -6,7 +6,7 @@
 #    By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/15 13:08:29 by cattouma          #+#    #+#              #
-#    Updated: 2016/05/15 15:02:58 by cattouma         ###   ########.fr        #
+#    Updated: 2016/05/18 17:08:55 by cattouma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ OBJS 		:=	$(OBJDIR)/main.o \
 				$(OBJDIR)/colors.o \
 				$(OBJDIR)/colors2.o \
 				$(OBJDIR)/draw.o \
+				$(OBJDIR)/draw2.o \
 				$(OBJDIR)/calculate.o \
 				$(OBJDIR)/get_point.o \
 				$(OBJDIR)/parsing.o \

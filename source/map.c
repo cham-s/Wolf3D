@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 20:12:11 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/17 15:39:03 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:05:10 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	draw_map(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 			buffer[y][mi->x] = color;
 			y++;
 		}
-		draw_w(w, mi->x, mi->draw_start, mi->draw_end, buffer);
+		draw_white_black(w, mi, buffer);
+		//draw_w(w, mi->x, mi->draw_start, mi->draw_end, buffer);
 		mi->x++;
 	}
 	w->first = 0;

@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:08:01 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/15 18:25:16 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/18 16:57:56 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	perform_dda(t_map_info *mi, t_winfo *w)
 			mi->map_y += mi->step_y;
 			mi->side = 1;
 		}
-		if (w->map[mi->map_x][mi->map_y] > 0) 
+		if (w->map[mi->map_x][mi->map_y] > 0)
 			mi->hit = 1;
 	}
 }
