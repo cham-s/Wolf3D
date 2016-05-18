@@ -179,6 +179,13 @@ void	reg_key(t_winfo *w, t_map_info *mi, SDL_Event *event)
 		init_map_info(mi, w);
 }
 
+void	keydown(t_winfo *w, t_map_info *mi, t_time_info *ti, SDL_Event *event)
+{
+	directions_key(w, ti, mi, event);
+	reg_key(w, mi, event);
+	enter_key(w, event);
+}
+
 void	draw(t_winfo *w)
 {
 	//malloc instead?
@@ -198,11 +205,7 @@ void	draw(t_winfo *w)
 			if (event.type == SDL_QUIT)
 				w->running = 0;
 			else if (event.key.type == SDL_KEYDOWN)
-			{
-				directions_key(w, &ti, &mi, &event);
-				reg_key(w, &mi, &event);
-				enter_key(w, &event);
-			}
+				keydown(w, &mi, &ti, &event);
 		}
 		if (w->show_menu)
 			render_menu(w);

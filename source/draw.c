@@ -220,3 +220,20 @@ void	draw_mini_map(t_winfo *w, t_map_info *mi)
 	draw_cube(w);
 	draw_player(w, mi);
 }
+
+void	render_menu(t_winfo *w)
+{
+	SDL_Rect	m;
+
+	clear_screen(w);
+	m.h = HEIGHT;
+	m.w = WIDTH;
+	m.x = 0;
+	m.y = 0;
+
+	if (w->index == 0)
+		SDL_RenderCopy(w->renderer, w->menu_start, NULL, &m);
+	else
+		SDL_RenderCopy(w->renderer, w->menu_exit, NULL, &m);
+	SDL_RenderPresent(w->renderer);
+}

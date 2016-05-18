@@ -38,6 +38,16 @@ static	void	init_points(char *file_name, t_winfo *w)
 	close(fd);
 }
 
+void check_zero_on_border(t_winfo *w, int x, int y, int val)
+{
+	if (!val && (x == 0 || y == 0 || y == w->total_col - 1 ||
+				x == w->total_li - 1))
+	{
+		ft_putendl_fd("Not a valid file", 2);
+		exit(EXIT_FAILURE);
+	}
+}
+
 static void		get_points(t_winfo *w, int *fd, char *line)
 {
 	int		x;
@@ -55,11 +65,7 @@ static void		get_points(t_winfo *w, int *fd, char *line)
 		while (x < w->total_li)
 		{
 			val = ft_atoi(split[x]);
-			if (!val && (x == 0 || y == 0 || y == w->total_col - 1 || x == w->total_li - 1))
-			{
-				ft_putendl_fd("Not a valid file", 2);
-				exit(EXIT_FAILURE);
-			}
+			check_zero_on_border(w, x, y, val);
 			w->map[y][x] = val;
 			x++;
 		}
@@ -80,5 +86,10 @@ void	get_map(char *file_name, t_winfo *w)
 	init_points(file_name, w);
 	fd = open(file_name, O_RDONLY);
 	get_points(w, &fd, line);
+	if (w->map[1][1])
+	{
+		ft_putendl_fd("Error Map: starting location blocked by a wall", 2);
+		exit(EXIT_FAILURE);
+	}
 	close(fd);
 }

@@ -22,12 +22,6 @@ void	init_map_info(t_map_info *mi, t_winfo *w)
 	mi->plane_y = old_plane_x * sin(-val) + mi->plane_y * cos(-val); 
 	w->did_win = 0;
 	w->map[1][8] = 1;
-	//change this to the start
-	/* if (w->map[(int)mi->pos_x][(int)mi->pos_y]) */
-	/* { */
-	/* 	ft_putendl_fd("starting location blocked by a wall", 2); */
-	/* 	exit(EXIT_FAILURE); */
-	/* } */
 }
 
 void	change_time_values(t_time_info *ti)
@@ -37,4 +31,39 @@ void	change_time_values(t_time_info *ti)
 	ti->frame_time = (ti->time - ti->oldtime) / 1000.0;
 	ti->move_speed = ti->frame_time * 5.0;
 	ti->rot_speed = ti->frame_time * 3.0;
+}
+
+void	init_window_info(t_winfo *w, int pos_x,
+		int pos_y, int size_x, int size_y)
+{
+	w->pos.x = pos_x;
+	w->pos.y = pos_y;
+	w->size.x = size_x;
+	w->size.y = size_y;
+	w->clear_c.r = 0;
+	w->clear_c.g = 0;
+	w->clear_c.b = 0;
+	w->clear_c.a = 255;
+	w->menu = 1;
+	w->index = 0;
+	w->show_menu = 1;
+	w->running = 1;
+	w->first = 1;
+	w->did_win = 0;
+}
+
+SDL_Texture	*load_texture(t_winfo *w, char *name)
+{
+	SDL_Surface	*surface;
+	SDL_Texture	*texture;
+
+	surface = SDL_LoadBMP(name);
+	if (!surface)
+	{
+		ft_putendl_fd("Failed to load textures: ", 2);
+		exit(EXIT_FAILURE);
+	}
+	texture = SDL_CreateTextureFromSurface(w->renderer, surface);
+	SDL_FreeSurface(surface);
+	return (texture);
 }

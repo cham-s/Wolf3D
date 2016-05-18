@@ -12,27 +12,8 @@
 
 #include "wolf3d.h"
 
-int		load_audio(t_winfo *w)
+void	load_audio2(t_winfo *w)
 {
-	char	*music;
-
-	if (!ft_strcmp(w->map_name, "space.w3d"))
-		music = "media/sound/rainforest.wav";
-	else
-		music = "media/sound/rainforest.wav";
-	w->music = Mix_LoadMUS(music);
-	if (!w->music)
-	{
-		ft_putendl_fd("Failed to load music ", 2);
-		exit(EXIT_FAILURE);
-	}
-	else
-	w->step = Mix_LoadWAV("media/sound/walk_s.wav");
-	if (!w->step)
-	{
-		ft_putendl_fd("Failed to load step sound effect", 2);
-		exit(EXIT_FAILURE);
-	}
 	w->winning = Mix_LoadWAV("media/sound/winning.wav");
 	if (!w->winning)
 	{
@@ -57,6 +38,30 @@ int		load_audio(t_winfo *w)
 		ft_putendl_fd("Failed to load enter sound effect", 2);
 		exit(EXIT_FAILURE);
 	}
+}
+
+int		load_audio(t_winfo *w)
+{
+	char	*music;
+
+	if (!ft_strcmp(w->map_name, "space.w3d"))
+		music = "media/sound/rainforest.wav";
+	else
+		music = "media/sound/rainforest.wav";
+	w->music = Mix_LoadMUS(music);
+	if (!w->music)
+	{
+		ft_putendl_fd("Failed to load music ", 2);
+		exit(EXIT_FAILURE);
+	}
+	else
+	w->step = Mix_LoadWAV("media/sound/walk_s.wav");
+	if (!w->step)
+	{
+		ft_putendl_fd("Failed to load step sound effect", 2);
+		exit(EXIT_FAILURE);
+	}
+	load_audio2(w);
 	return (0);
 }
 
@@ -91,25 +96,6 @@ int		init_sdl(void)
 	return (0);
 }
 
-void	init_window_info(t_winfo *w, int pos_x,
-		int pos_y, int size_x, int size_y)
-{
-	w->pos.x = pos_x;
-	w->pos.y = pos_y;
-	w->size.x = size_x;
-	w->size.y = size_y;
-	w->clear_c.r = 0;
-	w->clear_c.g = 0;
-	w->clear_c.b = 0;
-	w->clear_c.a = 255;
-	w->menu = 1;
-	w->index = 0;
-	w->show_menu = 1;
-	w->running = 1;
-	w->first = 1;
-	w->did_win = 0;
-}
-
 int		create_window(t_winfo *w, char *title, int flags)
 {
 	w->window = SDL_CreateWindow(title, w->pos.x, w->pos.y,
@@ -121,50 +107,4 @@ int		create_window(t_winfo *w, char *title, int flags)
 		return (EXIT_ERROR);
 	}
 	return (0);
-}
-
-int		create_renderer(t_winfo *w, int index, int flags)
-{
-	w->renderer = SDL_CreateRenderer(w->window, index, flags);
-	if (w->renderer == NULL)
-	{
-		ft_putstr_fd("Failed to Create Renderer: ", 2);
-		ft_putendl_fd(SDL_GetError(), 2);
-		return (EXIT_ERROR);
-	}
-	SDL_RenderSetLogicalSize(w->renderer, w->size.x, w->size.y);
-	return (0);
-}
-
-SDL_Texture	*load_texture(t_winfo *w, char *name)
-{
-	SDL_Surface	*surface;
-	SDL_Texture	*texture;
-
-	surface = SDL_LoadBMP(name);
-	if (!surface)
-	{
-		ft_putendl_fd("Failed to load textures: ", 2);
-		exit(EXIT_FAILURE);
-	}
-	texture = SDL_CreateTextureFromSurface(w->renderer, surface);
-	SDL_FreeSurface(surface);
-	return (texture);
-}
-
-void	render_menu(t_winfo *w)
-{
-	SDL_Rect	m;
-
-	clear_screen(w);
-	m.h = HEIGHT;
-	m.w = WIDTH;
-	m.x = 0;
-	m.y = 0;
-
-	if (w->index == 0)
-		SDL_RenderCopy(w->renderer, w->menu_start, NULL, &m);
-	else
-		SDL_RenderCopy(w->renderer, w->menu_exit, NULL, &m);
-	SDL_RenderPresent(w->renderer);
 }

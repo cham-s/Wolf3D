@@ -76,3 +76,16 @@ void	quit(t_winfo *w)
 	Mix_Quit();
 	SDL_Quit();
 }
+
+int		create_renderer(t_winfo *w, int index, int flags)
+{
+	w->renderer = SDL_CreateRenderer(w->window, index, flags);
+	if (w->renderer == NULL)
+	{
+		ft_putstr_fd("Failed to Create Renderer: ", 2);
+		ft_putendl_fd(SDL_GetError(), 2);
+		return (EXIT_ERROR);
+	}
+	SDL_RenderSetLogicalSize(w->renderer, w->size.x, w->size.y);
+	return (0);
+}

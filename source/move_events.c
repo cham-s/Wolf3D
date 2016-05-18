@@ -14,11 +14,12 @@
 
 void	move_forward(t_map_info *mi, t_time_info *ti, t_winfo *w)
 {
-	if (w->map[(int)(mi->pos_x + mi->dir_x * ti->move_speed)][(int)mi->pos_y] == 0)
+	if (w->map[(int)(mi->pos_x + mi->dir_x *
+				ti->move_speed)][(int)mi->pos_y] == 0)
 		mi->pos_x += mi->dir_x * C_SPEED;
-	if (w->map[(int)mi->pos_x][(int)(mi->pos_y + mi->dir_y * ti->move_speed)] == 0)
+	if (w->map[(int)mi->pos_x][(int)(mi->pos_y + mi->dir_y *
+				ti->move_speed)] == 0)
 		mi->pos_y += mi->dir_y * C_SPEED;
-	//printf("pos x: %d pos y: %d gate: %d\n", (int)mi->pos_x, (int)mi->pos_y,w->map[1][7] = 0 );
 	if ((int)mi->pos_x == 5 &&  (int)mi->pos_y == 1 &&
 			!ft_strcmp(w->map_name, "space.w3d") &&
 			!w->did_win)
@@ -32,11 +33,12 @@ void	move_forward(t_map_info *mi, t_time_info *ti, t_winfo *w)
 void	move_backward(t_map_info *mi, t_time_info *ti, t_winfo *w)
 {
 
-	if (w->map[(int)(mi->pos_x - mi->dir_x * ti->move_speed)][(int)mi->pos_y] == 0)
+	if (w->map[(int)(mi->pos_x - mi->dir_x *
+				ti->move_speed)][(int)mi->pos_y] == 0)
 		mi->pos_x -= mi->dir_x * C_SPEED;
-	if (w->map[(int)mi->pos_x][(int)(mi->pos_y - mi->dir_y * ti->move_speed)] == 0)
+	if (w->map[(int)mi->pos_x][(int)(mi->pos_y - mi->dir_y *
+				ti->move_speed)] == 0)
 		mi->pos_y -= mi->dir_y * C_SPEED;
-	//printf("pos x: %d pos y: %d gate: %d\n", (int)mi->pos_x, (int)mi->pos_y,w->map[1][7] = 0 );
 	if ((int)mi->pos_x == 5 &&  (int)mi->pos_y == 1 &&
 			!ft_strcmp(w->map_name, "space.w3d") &&
 			!w->did_win)
