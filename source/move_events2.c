@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 21:02:29 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 21:09:54 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/19 19:47:52 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	other_keys(t_winfo *w, SDL_Event *event)
 	}
 }
 
-void	directions_key(t_winfo *w, t_time_info *ti, t_map_info *mi, SDL_Event *event)
+void	directions_key(t_winfo *w, t_time_info *ti, t_map_info *mi,
+						SDL_Event *event)
 {
 	other_keys(w, event);
 	if (event->key.keysym.sym == SDLK_UP)

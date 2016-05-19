@@ -6,7 +6,7 @@
 #    By: cattouma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 13:59:55 by cattouma          #+#    #+#              #
-#    Updated: 2016/02/28 12:36:03 by cattouma         ###   ########.fr        #
+#    Updated: 2016/05/20 00:20:32 by cattouma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ OBJ = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o \
 	ft_isspace.o ft_lstdelmem.o get_next_line.o ft_strjoinfree.o ft_tablen.o tab_len.o \
 	tab_free.o
 
-CFLAGS = -c -Wall -Wextra -Werror -I includes
+CFLAGS = -Wall -Wextra -Werror -I includes
 .PHONY: all clean fclean re
 
 RM = rm -rf

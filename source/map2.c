@@ -6,48 +6,44 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 20:59:32 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 21:25:28 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/19 19:56:38 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	generate_texture(Uint32	tex[8][TEX_H * TEX_W])
+void	generate_texture(Uint32 tex[8][TEX_H * TEX_W])
 {
-	int x;
-	int y;
-	int xorco;
-	int ycolor;
-	int xycolor;
+	int		x;
+	int		y;
+	t_color c;
 
 	x = 0;
-	y = 0;
 	while (x < TEX_W)
 	{
+		y = 0;
 		while (y < TEX_H)
 		{
-			xorco = (x * 256 / TEX_W) ^ (y * 256 / TEX_H);
-			ycolor = y * 256 / TEX_H;
-			xycolor = y * 128 / TEX_H + x * 128 / TEX_W;
+			c.a = (x * 256 / TEX_W) ^ (y * 256 / TEX_H);
+			c.r = y * 256 / TEX_H;
+			c.g = y * 128 / TEX_H + x * 128 / TEX_W;
 			tex[0][TEX_W * y + x] = 65536 * 254 * (x != y && x != TEX_W - y);
-			tex[1][TEX_W * y + x] = xycolor + 256 * xycolor + 65536 * xycolor;
-			tex[2][TEX_W * y + x] = 256 * xycolor + 65536 * xycolor;
-			tex[3][TEX_W * y + x] = xorco + 256 * xorco + 65536 * xorco;
-			tex[4][TEX_W * y + x] = 256 * xorco;
+			tex[1][TEX_W * y + x] = c.g + 256 * c.g + 65536 * c.g;
+			tex[2][TEX_W * y + x] = 256 * c.g + 65536 * c.g;
+			tex[3][TEX_W * y + x] = c.a + 256 * c.a + 65536 * c.a;
+			tex[4][TEX_W * y + x] = 256 * c.a;
 			tex[5][TEX_W * y + x] = 65536 * 192 * (x % 16 && y % 16);
-			tex[6][TEX_W * y + x] = 65536 * ycolor;;
+			tex[6][TEX_W * y + x] = 65536 * c.r;
 			tex[7][TEX_W * y + x] = 128 + 256 * 128 + 65536 * 128;
 			y++;
 		}
 		x++;
-		y = 0;
 	}
 }
 
 void	get_coord_text(t_winfo *w, t_map_info *mi, t_ray_info *ri)
 {
-
-	mi->tex_num = w->map[mi->map_x][mi->map_y] - 1; 
+	mi->tex_num = w->map[mi->map_x][mi->map_y] - 1;
 	if (mi->side == 0)
 		mi->wall_x = ri->ray_pos_y + mi->perp_wall_dist * ri->ray_dir_y;
 	else
@@ -80,4 +76,3 @@ void	extract_color_from_text(t_map_info *mi, Uint32 buffer[HEIGHT][WIDTH],
 		y++;
 	}
 }
-

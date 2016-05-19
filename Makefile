@@ -6,7 +6,7 @@
 #    By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/15 13:08:29 by cattouma          #+#    #+#              #
-#    Updated: 2016/05/18 21:09:21 by cattouma         ###   ########.fr        #
+#    Updated: 2016/05/19 16:54:48 by cattouma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,6 @@ EXPECTED	=" 	lib/libsdl/libSDL2-2.0.0.dylib (compatibility version 5.0.0,\
 			 current version 5.0.0)"
 OUTPUT		:= "$(shell otool -L  $(NAME)| awk NR==2)"
 INC			= include/wolf3d.h
-
-
 OBJDIR		= obj
 LIBSDL		= -L$(LIBDIR)/$(SDLIBDIR) -lSDL2
 LIB 		:= lib/libft/libft.a
@@ -57,8 +55,8 @@ $(NAME): $(LIB) $(OBJS)
 	   	$(SDLIMG) $(SDLSND)
 	@install_name_tool -change /usr/local/lib/libSDL2-2.0.0.dylib $(SDLDYLIB)\
 	   	$(NAME)
-	@install_name_tool -change @rpath/SDL2_mixer.framework/Versions/A/SDL2_mixer $(SDLSND)\
-	   	$(NAME)
+	@install_name_tool -change @rpath/SDL2_mixer.framework/Versions/A/SDL2_mixer\
+	   	$(SDLSND) $(NAME)
 	@install_name_tool -change @rpath/SDL2_image.framework/Versions/A/SDL2_image\
 	   	$(SDLIMG) $(NAME)
 	@install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 $(SDLDYLIB)\

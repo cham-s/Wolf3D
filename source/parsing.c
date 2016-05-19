@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 13:06:17 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 17:44:31 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/20 00:18:04 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,23 @@
 
 static void	check_map(char *map)
 {
-	int fd;
+	int			fd;
+	struct stat	buf;
 
-	if ((fd = open(map, O_RDONLY)) == -1)
+	if (stat(map, &buf) < 0)
+	{
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(map, 2);
+		exit(EXIT_FAILURE);
+	}
+	if (!S_ISREG(buf.st_mode))
+	{
+		ft_putstr_fd("Not a regular file: ", 2);
+		ft_putendl_fd(map, 2);
+		exit(EXIT_FAILURE);
+	}
+	if ((fd = open(map, O_RDONLY)) < 0)
 	{
 		perror("Error ");
 		exit(EXIT_FAILURE);

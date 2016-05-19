@@ -6,7 +6,7 @@
 /*   By: cattouma <cattouma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 21:58:51 by cattouma          #+#    #+#             */
-/*   Updated: 2016/05/18 21:22:07 by cattouma         ###   ########.fr       */
+/*   Updated: 2016/05/20 00:17:53 by cattouma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 # include "SDL2/SDL_image.h"
 # include "SDL2/SDL_mixer.h"
 # include "libft.h"
-# include <time.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/errno.h>
 
 # define NO_FLAG 0
 # define ALL_INFO_INIT 3
@@ -59,12 +61,12 @@ typedef struct		s_winfo
 	SDL_Texture		*menu_start;
 	SDL_Texture		*menu_exit;
 	char			*map_name;
-	int				did_win;
 	int				menu;
 	int				index;
 	int				show_menu;
 	int				running;
 	int				first;
+	int				did_win;
 }					t_winfo;
 
 typedef	struct		s_map_info
@@ -171,8 +173,6 @@ void				check_error(int *fd, char *line, int x, int y);
 void				render_menu(t_winfo *w);
 SDL_Texture			*load_texture(t_winfo *w, char *name);
 void				destroy_tab(int **tab, size_t len);
-int					draw_w(t_winfo *w, int x, int start, int end,
-					Uint32 buffer[HEIGHT][WIDTH]);
 void				draw_white_black(t_winfo *w, t_map_info *mi,
 						Uint32 buffer[HEIGHT][WIDTH]);
 void				keydown(t_winfo *w, t_map_info *mi, t_time_info *ti,
