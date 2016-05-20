@@ -169,7 +169,7 @@ void				draw_mini_map(t_winfo *w, t_map_info *mi);
 void				get_map(char *file_name, t_winfo *w);
 int					check_args(int ac, char *map);
 void				check_len_map(int x_len, t_winfo *w);
-void				check_error(int *fd, char *line, int x, int y);
+void				check_error(int *fd, int x, int y);
 void				render_menu(t_winfo *w);
 SDL_Texture			*load_texture(t_winfo *w, char *name);
 void				destroy_tab(int **tab, size_t len);

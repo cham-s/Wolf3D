@@ -33,7 +33,7 @@ static void		init_points(char *file_name, t_winfo *w)
 		free(line);
 	}
 	free(line);
-	check_error(&fd, line, x_len, i);
+	check_error(&fd, x_len, i);
 	w->total_col = i;
 	close(fd);
 }

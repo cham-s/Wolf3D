@@ -62,8 +62,10 @@ int			check_args(int ac, char *map)
 	return (EXIT_SUCCESS);
 }
 
-void		check_error(int *fd, char *line, int x, int y)
+void		check_error(int *fd, int x, int y)
 {
+	char *line;
+
 	if (get_next_line(*fd, &line) < 0)
 	{
 		ft_putendl_fd("Not a valid file", 2);
